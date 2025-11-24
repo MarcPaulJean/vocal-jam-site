@@ -1,20 +1,18 @@
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { SongRecommendation } from "../types";
 
 const apiKey = process.env.API_KEY || '';
-// Fallback if env not set for demo purposes, but in prod strictly follow env usage.
-// Assuming the environment provides the key.
 
-let ai: GoogleGenAI | null = null;
+let genAI: GoogleGenerativeAI | null = null;
 
 try {
     if (apiKey) {
-        ai = new GoogleGenAI({ apiKey: apiKey });
+        genAI = new GoogleGenerativeAI(apiKey);
     } else {
         console.warn("API_KEY is missing. AI features will not work.");
     }
 } catch (e) {
-    console.error("Failed to initialize GoogleGenAI", e);
+    console.error("Failed to initialize GoogleGenerativeAI", e);
 }
 
 export const generateSmartSetlist = async (
@@ -23,48 +21,44 @@ export const generateSmartSetlist = async (
   experienceLevel: string,
   vibe: string
 ): Promise<SongRecommendation[]> => {
-  if (!ai) {
+  if (!genAI) {
     // Return mock data if API key is missing or initialization failed
     return [
-      { title: "API KEY MISSING", artist: "System", genre: "Error", vibe: "Check Config", difficulty: "Moyen" }
+      { title: "API KEY MISSING", artist: "Check Config", genre: "Error", vibe: "System", difficulty: "Moyen" }
     ];
   }
+
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
   const prompt = `
     Génère une liste de 6 chansons suggérées pour un musicien solo qui veut se produire sur scène avec Vocal Jam.
     Profil: Instrument: ${instrument}, Genre: ${genre}, Niveau: ${experienceLevel}, Ambiance souhaitée: ${vibe}.
-    Les chansons doivent être des classiques ou populaires adaptés à la scène.
+    
+    IMPORTANT: Réponds UNIQUEMENT avec un tableau JSON brut, sans Markdown (pas de \`\`\`json).
+    Structure attendue pour chaque item :
+    {
+      "title": "Titre",
+      "artist": "Artiste",
+      "genre": "Genre",
+      "vibe": "Ambiance",
+      "difficulty": "Facile" | "Moyen" | "Difficile"
+    }
   `;
 
   try {
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-      config: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.ARRAY,
-          items: {
-            type: Type.OBJECT,
-            properties: {
-              title: { type: Type.STRING },
-              artist: { type: Type.STRING },
-              genre: { type: Type.STRING },
-              vibe: { type: Type.STRING },
-              difficulty: { type: Type.STRING, enum: ["Facile", "Moyen", "Difficile"] }
-            },
-            required: ["title", "artist", "genre", "vibe", "difficulty"]
-          }
-        }
-      }
-    });
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    let text = response.text();
+    
+    // Nettoyage du markdown si l'IA en ajoute
+    text = text.replace(/```json/g, '').replace(/```/g, '').trim();
 
-    if (response.text) {
-      return JSON.parse(response.text) as SongRecommendation[];
-    }
-    return [];
+    return JSON.parse(text) as SongRecommendation[];
   } catch (error) {
     console.error("Error generating setlist:", error);
-    return [];
+    // Fallback data en cas d'erreur de parsing ou d'API
+    return [
+      { title: "Service Indisponible", artist: "Réessayez plus tard", genre: "N/A", vibe: "N/A", difficulty: "Moyen" }
+    ];
   }
 };
