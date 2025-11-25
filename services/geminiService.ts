@@ -1,5 +1,53 @@
-// import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { SongRecommendation } from "../types";
+
+// --- MODE SIMULATION INTELLIGENTE (FALLBACK) ---
+// Cette base de données permet à l'appli de fonctionner de manière crédible
+// même sans clé API configurée.
+const MOCK_DATABASES: Record<string, SongRecommendation[]> = {
+  "Pop-Rock": [
+    { title: "Bohemian Rhapsody", artist: "Queen", genre: "Rock", vibe: "Epic", difficulty: "Difficile" },
+    { title: "Wonderwall", artist: "Oasis", genre: "Pop Rock", vibe: "Cool", difficulty: "Facile" },
+    { title: "Don't Stop Believin'", artist: "Journey", genre: "Rock", vibe: "Énergique", difficulty: "Moyen" },
+    { title: "Angels", artist: "Robbie Williams", genre: "Pop", vibe: "Émotion", difficulty: "Facile" },
+    { title: "Uprising", artist: "Muse", genre: "Rock", vibe: "Puissant", difficulty: "Difficile" }
+  ],
+  "Variété Française": [
+    { title: "Je te donne", artist: "Jean-Jacques Goldman", genre: "Variété", vibe: "Fédérateur", difficulty: "Moyen" },
+    { title: "L'Envie", artist: "Johnny Hallyday", genre: "Rock", vibe: "Puissant", difficulty: "Difficile" },
+    { title: "La Grenade", artist: "Clara Luciani", genre: "Pop", vibe: "Rythmé", difficulty: "Facile" },
+    { title: "Sous le vent", artist: "Garou & Céline Dion", genre: "Duo", vibe: "Romantique", difficulty: "Moyen" },
+    { title: "Mistral Gagnant", artist: "Renaud", genre: "Ballade", vibe: "Mélancolique", difficulty: "Facile" }
+  ],
+  "Soul & Blues": [
+    { title: "Feeling Good", artist: "Nina Simone", genre: "Soul", vibe: "Puissant", difficulty: "Moyen" },
+    { title: "Respect", artist: "Aretha Franklin", genre: "Soul", vibe: "Énergique", difficulty: "Moyen" },
+    { title: "Ain't No Sunshine", artist: "Bill Withers", genre: "Blues", vibe: "Intime", difficulty: "Facile" },
+    { title: "Superstition", artist: "Stevie Wonder", genre: "Funk/Soul", vibe: "Groovy", difficulty: "Difficile" },
+    { title: "Back to Black", artist: "Amy Winehouse", genre: "Soul", vibe: "Sombre", difficulty: "Moyen" }
+  ],
+  "Jazz Standards": [
+    { title: "Fly Me to the Moon", artist: "Frank Sinatra", genre: "Jazz", vibe: "Swing", difficulty: "Moyen" },
+    { title: "Summertime", artist: "Ella Fitzgerald", genre: "Jazz", vibe: "Lent", difficulty: "Facile" },
+    { title: "Autumn Leaves", artist: "Standard", genre: "Jazz", vibe: "Mélancolique", difficulty: "Moyen" },
+    { title: "Take Five", artist: "Dave Brubeck", genre: "Jazz", vibe: "Complexe", difficulty: "Difficile" },
+    { title: "What a Wonderful World", artist: "Louis Armstrong", genre: "Jazz", vibe: "Douceur", difficulty: "Facile" }
+  ],
+  "Hard Rock 80s": [
+    { title: "Highway to Hell", artist: "AC/DC", genre: "Hard Rock", vibe: "Électrique", difficulty: "Moyen" },
+    { title: "Sweet Child O' Mine", artist: "Guns N' Roses", genre: "Hard Rock", vibe: "Épique", difficulty: "Difficile" },
+    { title: "Jump", artist: "Van Halen", genre: "Hard Rock", vibe: "Festif", difficulty: "Moyen" },
+    { title: "Still Loving You", artist: "Scorpions", genre: "Ballade Rock", vibe: "Émotion", difficulty: "Moyen" },
+    { title: "Livin' on a Prayer", artist: "Bon Jovi", genre: "Rock", vibe: "Hymne", difficulty: "Difficile" }
+  ],
+  "Acoustique / Folk": [
+    { title: "Hallelujah", artist: "Jeff Buckley", genre: "Folk", vibe: "Sacré", difficulty: "Moyen" },
+    { title: "Fast Car", artist: "Tracy Chapman", genre: "Folk", vibe: "Nostalgique", difficulty: "Facile" },
+    { title: "Hotel California (Unplugged)", artist: "Eagles", genre: "Rock Acoustique", vibe: "Chill", difficulty: "Difficile" },
+    { title: "Redemption Song", artist: "Bob Marley", genre: "Reggae/Folk", vibe: "Engagé", difficulty: "Facile" },
+    { title: "Perfect", artist: "Ed Sheeran", genre: "Pop Folk", vibe: "Romantique", difficulty: "Facile" }
+  ]
+};
 
 export const generateSmartSetlist = async (
   genre: string,
@@ -7,38 +55,64 @@ export const generateSmartSetlist = async (
   experienceLevel: string,
   vibe: string
 ): Promise<SongRecommendation[]> => {
-  // MODE SIMULATION (POUR DÉPLOIEMENT VERCEL)
-  // On simule une attente pour faire "comme si" l'IA réfléchissait
-  await new Promise(resolve => setTimeout(resolve, 2000));
-
-  console.log(`Generating setlist for: ${genre}, ${instrument}, ${vibe}`);
-
-  // Retourne des données statiques de haute qualité pour la démo
-  // Cela garantit que le site ne plante pas, même sans clé API ou librairie
-  return [
-    { title: "Bohemian Rhapsody", artist: "Queen", genre: "Rock", vibe: "Epic", difficulty: "Difficile" },
-    { title: "Wonderwall", artist: "Oasis", genre: "Pop Rock", vibe: "Cool", difficulty: "Facile" },
-    { title: "Imagine", artist: "John Lennon", genre: "Pop", vibe: "Intime", difficulty: "Facile" },
-    { title: "Hotel California", artist: "Eagles", genre: "Rock", vibe: "Chill", difficulty: "Moyen" },
-    { title: "Shape of You", artist: "Ed Sheeran", genre: "Pop", vibe: "Dansant", difficulty: "Moyen" },
-    { title: "Hallelujah", artist: "Leonard Cohen", genre: "Folk", vibe: "Émotion", difficulty: "Facile" }
-  ];
-
-  /* 
-  --- CODE ORIGINAL (À RÉACTIVER UNE FOIS LE SITE EN LIGNE) ---
   
-  // @ts-ignore
-  const apiKey = import.meta.env?.VITE_API_KEY || process.env.API_KEY || process.env.VITE_API_KEY;
+  // Simulation d'attente pour l'effet "IA qui réfléchit"
+  await new Promise(resolve => setTimeout(resolve, 1500));
 
+  // 1. TENTATIVE DE RÉCUPÉRATION DE LA CLÉ API
+  // @ts-ignore
+  const apiKey = import.meta.env?.VITE_API_KEY || process.env.VITE_API_KEY;
+
+  // 2. SI PAS DE CLÉ API -> MODE "SIMULATION INTELLIGENTE"
   if (!apiKey) {
-    return [
-       { title: "Mode Démo (Clé manquante)", artist: "Vocal Jam", genre: "System", vibe: "Info", difficulty: "Facile" }
-    ];
+    console.log("⚠️ Aucune clé API trouvée. Utilisation du mode Simulation Intelligente.");
+    
+    // On récupère la liste correspondant au genre, ou une liste par défaut
+    const mockList = MOCK_DATABASES[genre] || MOCK_DATABASES["Pop-Rock"];
+    
+    // On mélange un peu la liste pour que ça paraisse dynamique
+    // et on retourne 5 éléments max
+    const shuffled = [...mockList].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 5);
   }
 
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  
-  // ... appel API ...
-  */
+  // 3. SI CLÉ API PRÉSENTE -> APPEL RÉEL À GEMINI
+  try {
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const prompt = `
+      Agis comme un directeur musical professionnel pour un événement 'Vocal Jam' (Karaoké Live avec musiciens).
+      
+      Contexte :
+      - Genre: ${genre}
+      - Instrument/Formation: ${instrument}
+      - Niveau: ${experienceLevel}
+      - Ambiance souhaitée: ${vibe}
+
+      Génère une liste de 5 chansons idéales et variées qui correspondent à ces critères.
+      
+      Format de réponse attendu : Uniquement un tableau JSON valide.
+      Exemple de format :
+      [
+        { "title": "Titre", "artist": "Artiste", "genre": "Style", "vibe": "Ambiance", "difficulty": "Facile/Moyen/Difficile" }
+      ]
+      Ne mets pas de markdown, juste le JSON brut.
+    `;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    // Nettoyage du markdown si l'IA en met (```json ...)
+    const cleanText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+    
+    const recommendations: SongRecommendation[] = JSON.parse(cleanText);
+    return recommendations;
+
+  } catch (error) {
+    console.error("Erreur Gemini (Fallback activé):", error);
+    // En cas d'erreur API, on retombe sur le mode simulation
+    return MOCK_DATABASES[genre] || MOCK_DATABASES["Pop-Rock"];
+  }
 };
