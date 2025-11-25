@@ -12,7 +12,8 @@
         color: #f3f4f6;
       }
     </style>
-    <!-- Réintégration du CDN pour assurer que la preview fonctionne, même si le build Vercel utilise PostCSS -->
+    <!-- Le CDN Tailwind est conservé uniquement pour assurer le bon affichage de la Preview dans l'éditeur.
+         En production (Vercel), le fichier CSS compilé prendra le relais. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -45,14 +46,12 @@
   <script type="importmap">
 {
   "imports": {
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
-    "vite": "https://aistudiocdn.com/vite@^7.2.4",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "@google/generative-ai": "https://aistudiocdn.com/@google/generative-ai@^0.24.1"
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
   }
 }
 </script>
