@@ -174,9 +174,6 @@ export const GalleryPage = () => {
                     <Icons.Play className="w-4 h-4 fill-current" />
                     Regarder sur YouTube
                   </a>
-                  <p className="text-[10px] text-gray-500 max-w-[200px] text-center sm:text-right leading-tight">
-                    * Si l'écran reste noir ici, c'est une restriction liée au mode "Prototype". Cela fonctionnera sur vocaljam.org.
-                  </p>
                 </div>
               )}
             </div>
