@@ -38,7 +38,7 @@ export const galleryItems: GalleryItem[] = [
     event: "Évènement familial",
     type: "video",
     quote: "Interpréter cette création originale de Marco (Paroles et Musique) avec un son aussi pur, c'était une émotion brute.",
-    imageUrl: "https://img.youtube.com/vi/_axiAIe3rfQ/maxresdefault.jpg",
+    imageUrl: "https://img.youtube.com/vi/_axiAIe3rfQ/hqdefault.jpg",
     style: "Création (Marco)",
     videoId: "_axiAIe3rfQ" // Christophe B.
   },
