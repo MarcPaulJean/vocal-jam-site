@@ -61,7 +61,7 @@ export const galleryItems: GalleryItem[] = [
     event: "Terrasse de Café",
     type: "photo",
     quote: "Une ambiance incroyable en terrasse. L'ingénierie son Vocal Jam a sublimé notre set acoustique.",
-    imageUrl: "https://img.youtube.com/vi/wUdAw8wwgMw/maxresdefault.jpg",
+    imageUrl: "https://img.youtube.com/vi/wUdAw8wwgMw/hqdefault.jpg",
     style: "Souvenir Live",
   },
   {
