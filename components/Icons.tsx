@@ -19,7 +19,9 @@ import {
   Mail,
   Phone,
   MapPin,
-  Globe
+  Globe,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 export const Icons = {
@@ -41,5 +43,7 @@ export const Icons = {
   Mail: Mail,
   Phone: Phone,
   Location: MapPin,
-  Website: Globe
+  Website: Globe,
+  ArrowLeft: ChevronLeft,
+  ArrowRight: ChevronRight
 };

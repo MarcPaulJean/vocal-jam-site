@@ -64,7 +64,7 @@ export const galleryItems: GalleryItem[] = [
     videoId: "cNS6c9fKqI4"
   },
 
-  // --- PHOTOS / SOUVENIRS ---
+  // --- PHOTOS / SOUVENIRS (CARROUSEL) ---
   {
     id: 6,
     artist: "L'Équipe & Vous",
@@ -100,6 +100,43 @@ export const galleryItems: GalleryItem[] = [
     quote: "Trouver la bonne harmonie, le bon accord. Un travail de précision et d'écoute.",
     imageUrl: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=800",
     style: "Répétition",
+  },
+  // Nouveaux items pour le carrousel (Exemples)
+  {
+    id: 11,
+    artist: "Jam Session",
+    event: "Improvisation",
+    type: "photo",
+    quote: "Quand les musiciens se lâchent après le concert. Pure énergie.",
+    imageUrl: "https://images.unsplash.com/photo-1519508544483-fa87121222f1?auto=format&fit=crop&q=80&w=800",
+    style: "Jam",
+  },
+  {
+    id: 12,
+    artist: "Festival d'Été",
+    event: "Plein Air",
+    type: "photo",
+    quote: "Jouer sous les étoiles, une ambiance unique pour les soirées d'été.",
+    imageUrl: "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?auto=format&fit=crop&q=80&w=800",
+    style: "Festival",
+  },
+  {
+    id: 13,
+    artist: "Préparation Scène",
+    event: "Soundcheck",
+    type: "photo",
+    quote: "Les réglages finaux avant l'arrivée du public. Concentration maximale.",
+    imageUrl: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=800",
+    style: "Technique",
+  },
+  {
+    id: 14,
+    artist: "Duo Guitare",
+    event: "Café Concert",
+    type: "photo",
+    quote: "La proximité avec le public dans les petits lieux, c'est ce qu'on préfère.",
+    imageUrl: "https://images.unsplash.com/photo-1510915361408-05a8af4a65e5?auto=format&fit=crop&q=80&w=800",
+    style: "Intime",
   }
 ];
 
