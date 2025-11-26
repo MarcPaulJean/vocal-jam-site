@@ -24,6 +24,16 @@ export const galleryItems: GalleryItem[] = [
     videoId: "TePmOgPjmho"
   },
   {
+    id: 10,
+    artist: "Eric P.",
+    event: "Studio Session",
+    type: "video",
+    quote: "Un travail de ré-arrangement musical original pour donner une toute nouvelle dimension à l'œuvre.",
+    imageUrl: "https://img.youtube.com/vi/hKhwAQ3gMH8/maxresdefault.jpg",
+    style: "Ré-arrangement",
+    videoId: "hKhwAQ3gMH8"
+  },
+  {
     id: 3,
     artist: "Christophe B.",
     event: "Évènement familial",
@@ -55,15 +65,6 @@ export const galleryItems: GalleryItem[] = [
   },
 
   // --- PHOTOS / SOUVENIRS ---
-  {
-    id: 2,
-    artist: "Groupe Triomio",
-    event: "Terrasse de Café",
-    type: "photo",
-    quote: "Une ambiance incroyable en terrasse. L'ingénierie son Vocal Jam a sublimé notre set acoustique.",
-    imageUrl: "https://img.youtube.com/vi/wUdAw8wwgMw/hqdefault.jpg",
-    style: "Souvenir Live",
-  },
   {
     id: 6,
     artist: "L'Équipe & Vous",
