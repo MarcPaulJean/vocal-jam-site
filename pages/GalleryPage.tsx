@@ -14,6 +14,59 @@ export const GalleryPage = () => {
     setSelectedItem(null);
   };
 
+  // Séparation des données
+  const videos = galleryItems.filter(item => item.type === 'video');
+  const photos = galleryItems.filter(item => item.type === 'photo');
+
+  // Composant Carte Galerie (Réutilisable)
+  const GalleryCard = ({ item }: { item: GalleryItem }) => (
+    <div 
+      onClick={() => openLightbox(item)}
+      className="group relative bg-jam-900 rounded-2xl overflow-hidden shadow-xl border border-jam-800 hover:border-neon-pink/50 transition-all duration-300 hover:transform hover:-translate-y-2 cursor-pointer h-full flex flex-col"
+    >
+      {/* Image Area */}
+      <div className="h-56 w-full relative overflow-hidden">
+        <img 
+          src={item.imageUrl} 
+          alt={`Performance de ${item.artist}`}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-transparent to-transparent opacity-80"></div>
+        
+        {item.type === 'video' ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/50 group-hover:scale-110 transition-transform shadow-lg">
+              <Icons.Play className="w-6 h-6 text-white fill-white pl-1" />
+            </div>
+          </div>
+        ) : (
+          <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md px-2 py-1 rounded-full flex items-center gap-1 border border-white/10">
+            <Icons.Camera className="w-3 h-3 text-gray-200" />
+            <span className="text-[10px] font-medium text-white uppercase tracking-wide">Photo</span>
+          </div>
+        )}
+        
+        <div className="absolute bottom-3 left-3 right-3">
+          <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold shadow-sm backdrop-blur-sm border ${item.type === 'video' ? 'bg-neon-blue/80 border-neon-blue/30 text-white' : 'bg-jam-500/80 border-jam-400/30 text-white'}`}>
+            {item.style}
+          </span>
+        </div>
+      </div>
+
+      {/* Content Info */}
+      <div className="p-5 flex-1 flex flex-col bg-jam-900">
+        <h3 className="text-lg font-bold text-white group-hover:text-neon-pink transition-colors mb-1">{item.artist}</h3>
+        <p className="text-xs text-jam-400 flex items-center gap-1 mb-3">
+          <Icons.Event className="w-3 h-3" />
+          {item.event}
+        </p>
+        <p className="text-gray-400 text-sm italic border-l-2 border-jam-700 pl-3 leading-snug mt-auto">
+          "{item.quote}"
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-jam-950 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -22,82 +75,55 @@ export const GalleryPage = () => {
             <Icons.Camera className="w-8 h-8 text-neon-pink" />
           </div>
           <h1 className="text-4xl font-extrabold text-white mb-4">
-            Hall of <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">Fame</span>
+            Galerie <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">Vocal Jam</span>
           </h1>
           <p className="max-w-2xl mx-auto text-xl text-gray-400">
-            Ils ont osé franchir le pas. Découvrez les artistes qui ont transformé leur rêve en performance live avec Vocal Jam.
+            Des premières notes en studio jusqu'à l'émotion de la scène.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryItems.map((item) => (
-            <div 
-              key={item.id} 
-              onClick={() => openLightbox(item)}
-              className="group relative bg-jam-900 rounded-2xl overflow-hidden shadow-xl border border-jam-800 hover:border-neon-pink/50 transition-all duration-300 hover:transform hover:-translate-y-2 cursor-pointer"
-            >
-              
-              {/* Image Area with Overlay */}
-              <div className="h-64 w-full relative">
-                <img 
-                  src={item.imageUrl} 
-                  alt={`Performance de ${item.artist}`}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                {/* Dark gradient overlay for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-jam-900/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
-                
-                {item.type === 'video' ? (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/50 group-hover:scale-110 transition-transform cursor-pointer shadow-[0_0_20px_rgba(0,0,0,0.3)]">
-                      <Icons.Play className="w-8 h-8 text-white fill-white pl-1" />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-2 border border-white/10">
-                    <Icons.Camera className="w-4 h-4 text-gray-200" />
-                    <span className="text-xs font-medium text-white">Photo</span>
-                  </div>
-                )}
-                
-                <div className="absolute bottom-4 left-4 right-4">
-                  <span className="inline-block px-2 py-1 rounded bg-neon-blue/80 border border-neon-blue/30 text-white text-xs font-bold shadow-lg backdrop-blur-sm">
-                    {item.style}
-                  </span>
-                </div>
-              </div>
-
-              {/* Content Info */}
-              <div className="p-6 relative bg-jam-900">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-neon-pink transition-colors">{item.artist}</h3>
-                    <p className="text-sm text-jam-400 flex items-center gap-1 mt-1">
-                      <Icons.Event className="w-3 h-3" />
-                      {item.event}
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="relative">
-                  <Icons.Star className="w-4 h-4 text-neon-pink absolute -top-1 -left-2 opacity-50" />
-                  <p className="text-gray-300 italic text-sm pl-4 border-l-2 border-jam-700">
-                    "{item.quote}"
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* SECTION 1 : CRÉATIONS / VIDÉOS */}
+        <div className="mb-20">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-jam-700"></div>
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Icons.Music className="text-neon-blue" />
+              Studio & Créations
+            </h2>
+            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-jam-700"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {videos.map((item) => (
+              <GalleryCard key={item.id} item={item} />
+            ))}
+          </div>
         </div>
 
-        <div className="mt-20 text-center bg-jam-900/50 rounded-3xl p-10 border border-dashed border-jam-700">
+        {/* SECTION 2 : PHOTOS / SOUVENIRS */}
+        <div>
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-jam-700"></div>
+            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+              <Icons.Community className="text-jam-400" />
+              Rencontres & Souvenirs
+            </h2>
+            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-jam-700"></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {photos.map((item) => (
+              <GalleryCard key={item.id} item={item} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-24 text-center bg-jam-900/50 rounded-3xl p-10 border border-dashed border-jam-700">
           <Icons.Film className="w-12 h-12 text-gray-500 mx-auto mb-4" />
-          <h3 className="text-2xl font-bold text-white mb-2">Votre performance ici ?</h3>
+          <h3 className="text-2xl font-bold text-white mb-2">Votre projet commence ici</h3>
           <p className="text-gray-400 mb-8">
-            Rejoignez la communauté Vocal Jam. Nous filmons toutes les prestations pour vous fournir du contenu pro.
+            Que ce soit pour une reprise ou une composition originale, nous documentons votre parcours.
           </p>
           <button className="px-8 py-3 bg-jam-800 hover:bg-jam-700 text-white rounded-full font-semibold transition-colors border border-jam-600">
-            Je veux ma place sur le mur
+            Lancer mon projet
           </button>
         </div>
       </div>
@@ -117,7 +143,7 @@ export const GalleryPage = () => {
 
           <div 
             className="w-full max-w-5xl max-h-[90vh] flex flex-col bg-jam-900 rounded-xl overflow-hidden shadow-2xl border border-jam-700"
-            onClick={(e) => e.stopPropagation()} // Empêche la fermeture si on clique DANS la modal
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Media Container */}
             <div className="relative w-full aspect-video bg-black flex items-center justify-center group">
