@@ -1,5 +1,8 @@
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { SongRecommendation } from "../types";
+
+// Hack pour éviter l'erreur TypeScript "Cannot find name 'process'"
+declare const process: any;
 
 // --- MODE SIMULATION INTELLIGENTE (FALLBACK) ---
 const MOCK_DATABASES: Record<string, SongRecommendation[]> = {
@@ -54,58 +57,51 @@ export const generateSmartSetlist = async (
   vibe: string
 ): Promise<SongRecommendation[]> => {
   
+  // Délai artificiel pour l'UX
   await new Promise(resolve => setTimeout(resolve, 1500));
 
-  const apiKey = process.env.API_KEY;
+  // Tentative de récupération de la clé API de manière sécurisée
+  let apiKey = '';
+  try {
+    // @ts-ignore
+    apiKey = import.meta.env.VITE_API_KEY || process.env.API_KEY || '';
+  } catch (e) {
+    console.log("Environnement API non détecté");
+  }
 
   if (!apiKey) {
     console.log("⚠️ Aucune clé API trouvée. Utilisation du mode Simulation Intelligente.");
     const mockList = MOCK_DATABASES[genre] || MOCK_DATABASES["Pop-Rock"];
+    // Mélange simple
     const shuffled = [...mockList].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 5);
   }
 
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    // Utilisation de l'ancien SDK (@google/generative-ai) compatible avec le package.json
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     
     const prompt = `
-      Agis comme un directeur musical professionnel pour un événement 'Vocal Jam'.
-      Contexte : Genre ${genre}, Instrument ${instrument}, Niveau ${experienceLevel}, Ambiance ${vibe}.
-      Génère une liste de 5 chansons recommandées.
-      Pour la difficulté, choisis parmi : 'Facile', 'Moyen', 'Difficile'.
+      Agis comme un directeur musical professionnel.
+      Génère une liste de 5 chansons au format JSON strict (tableau d'objets) pour :
+      Genre: ${genre}, Instrument: ${instrument}, Niveau: ${experienceLevel}, Ambiance: ${vibe}.
+      Chaque objet doit avoir : "title", "artist", "genre", "vibe", "difficulty" (Facile/Moyen/Difficile).
+      Ne mets pas de markdown, juste le JSON brut.
     `;
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-      config: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.ARRAY,
-          items: {
-            type: Type.OBJECT,
-            properties: {
-              title: { type: Type.STRING },
-              artist: { type: Type.STRING },
-              genre: { type: Type.STRING },
-              vibe: { type: Type.STRING },
-              difficulty: { type: Type.STRING }
-            },
-            required: ["title", "artist", "genre", "vibe", "difficulty"],
-          },
-        },
-      }
-    });
-
-    const text = response.text;
-    if (!text) {
-      throw new Error("Réponse vide de Gemini");
-    }
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    let text = response.text();
     
+    // Nettoyage basique du markdown si présent (```json ...)
+    text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+
     return JSON.parse(text) as SongRecommendation[];
 
   } catch (error) {
     console.error("Erreur Gemini (Fallback activé):", error);
-    return MOCK_DATABASES[genre] || MOCK_DATABASES["Pop-Rock"];
+    const mockList = MOCK_DATABASES[genre] || MOCK_DATABASES["Pop-Rock"];
+    return [...mockList].sort(() => 0.5 - Math.random()).slice(0, 5);
   }
 };
