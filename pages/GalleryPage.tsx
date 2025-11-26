@@ -1,11 +1,10 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { Icons } from '../components/Icons';
 import { galleryItems, GalleryItem } from '../data/mockData';
 
 export const GalleryPage = () => {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const openLightbox = (item: GalleryItem) => {
     setSelectedItem(item);
@@ -15,28 +14,15 @@ export const GalleryPage = () => {
     setSelectedItem(null);
   };
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 320; // Largeur approx d'une carte + gap
-      const newScrollLeft = scrollContainerRef.current.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount);
-      scrollContainerRef.current.scrollTo({
-        left: newScrollLeft,
-        behavior: 'smooth'
-      });
-    }
-  };
-
   // Séparation des données
   const videos = galleryItems.filter(item => item.type === 'video');
   const photos = galleryItems.filter(item => item.type === 'photo');
 
   // Composant Carte Galerie (Réutilisable)
-  const GalleryCard = ({ item, isSlide = false }: { item: GalleryItem, isSlide?: boolean }) => (
+  const GalleryCard = ({ item }: { item: GalleryItem }) => (
     <div 
       onClick={() => openLightbox(item)}
-      className={`group relative bg-jam-900 rounded-2xl overflow-hidden shadow-xl border border-jam-800 hover:border-neon-pink/50 transition-all duration-300 hover:transform hover:-translate-y-2 cursor-pointer flex flex-col
-        ${isSlide ? 'min-w-[280px] w-[280px] md:min-w-[320px] md:w-[320px] h-full snap-start' : 'h-full'}
-      `}
+      className="group relative bg-jam-900 rounded-2xl overflow-hidden shadow-xl border border-jam-800 hover:border-neon-pink/50 transition-all duration-300 hover:transform hover:-translate-y-2 cursor-pointer flex flex-col h-full"
     >
       {/* Image Area */}
       <div className="h-48 md:h-56 w-full relative overflow-hidden">
@@ -113,7 +99,7 @@ export const GalleryPage = () => {
           </div>
         </div>
 
-        {/* SECTION 2 : PHOTOS / SOUVENIRS (CARROUSEL) */}
+        {/* SECTION 2 : PHOTOS / SOUVENIRS (GRILLE SIMPLE) */}
         <div className="mb-20">
           <div className="flex items-center justify-between gap-4 mb-8">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-jam-700"></div>
@@ -122,40 +108,13 @@ export const GalleryPage = () => {
               Rencontres & Souvenirs
             </h2>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-jam-700"></div>
-            
-            {/* Navigation Carrousel */}
-            <div className="flex gap-2">
-              <button 
-                onClick={() => scroll('left')}
-                className="p-2 rounded-full bg-jam-800 hover:bg-neon-pink text-white transition-colors border border-jam-600 hover:border-neon-pink"
-                aria-label="Précédent"
-              >
-                <Icons.ArrowLeft className="w-5 h-5" />
-              </button>
-              <button 
-                onClick={() => scroll('right')}
-                className="p-2 rounded-full bg-jam-800 hover:bg-neon-pink text-white transition-colors border border-jam-600 hover:border-neon-pink"
-                aria-label="Suivant"
-              >
-                <Icons.ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
           </div>
 
-          {/* Container Scrollable */}
-          <div className="relative group/slider">
-             {/* Ombre de dégradé pour indiquer le scroll */}
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-jam-950 to-transparent z-10 pointer-events-none md:hidden"></div>
-
-            <div 
-              ref={scrollContainerRef}
-              className="flex gap-6 overflow-x-auto pb-8 pt-4 px-2 snap-x snap-mandatory scrollbar-hide -mx-2 md:mx-0"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Cache scrollbar Firefox/IE
-            >
-              {photos.map((item) => (
-                <GalleryCard key={item.id} item={item} isSlide={true} />
-              ))}
-            </div>
+          {/* Grille Photos */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {photos.map((item) => (
+              <GalleryCard key={item.id} item={item} />
+            ))}
           </div>
         </div>
 
