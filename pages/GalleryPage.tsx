@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Icons } from '../components/Icons';
 import { galleryItems, GalleryItem } from '../data/mockData';
@@ -7,6 +6,55 @@ import { PageView } from '../types';
 interface GalleryPageProps {
   onNavigate: (page: PageView) => void;
 }
+
+// Extracted GalleryCard component to fix 'key' prop issue and improve performance
+const GalleryCard: React.FC<{ item: GalleryItem; onClick: (item: GalleryItem) => void }> = ({ item, onClick }) => (
+  <div 
+    onClick={() => onClick(item)}
+    className="group relative bg-jam-900 rounded-2xl overflow-hidden shadow-xl border border-jam-800 hover:border-neon-pink/50 transition-all duration-300 hover:transform hover:-translate-y-2 cursor-pointer flex flex-col h-full"
+  >
+    {/* Image Area */}
+    <div className="h-48 md:h-56 w-full relative overflow-hidden">
+      <img 
+        src={item.imageUrl} 
+        alt={`Performance de ${item.artist}`}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-transparent to-transparent opacity-80"></div>
+      
+      {item.type === 'video' ? (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/50 group-hover:scale-110 transition-transform shadow-lg">
+            <Icons.Play className="w-6 h-6 text-white fill-white pl-1" />
+          </div>
+        </div>
+      ) : (
+        <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md px-2 py-1 rounded-full flex items-center gap-1 border border-white/10">
+          <Icons.Camera className="w-3 h-3 text-gray-200" />
+          <span className="text-[10px] font-medium text-white uppercase tracking-wide">Photo</span>
+        </div>
+      )}
+      
+      <div className="absolute bottom-3 left-3 right-3">
+        <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold shadow-sm backdrop-blur-sm border ${item.type === 'video' ? 'bg-neon-blue/80 border-neon-blue/30 text-white' : 'bg-jam-500/80 border-jam-400/30 text-white'}`}>
+          {item.style}
+        </span>
+      </div>
+    </div>
+
+    {/* Content Info */}
+    <div className="p-5 flex-1 flex flex-col bg-jam-900">
+      <h3 className="text-lg font-bold text-white group-hover:text-neon-pink transition-colors mb-1 truncate">{item.artist}</h3>
+      <p className="text-xs text-jam-400 flex items-center gap-1 mb-3">
+        <Icons.Event className="w-3 h-3" />
+        {item.event}
+      </p>
+      <p className="text-gray-400 text-sm italic border-l-2 border-jam-700 pl-3 leading-snug mt-auto line-clamp-3">
+        "{item.quote}"
+      </p>
+    </div>
+  </div>
+);
 
 export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
@@ -22,55 +70,6 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
   // Séparation des données
   const videos = galleryItems.filter(item => item.type === 'video');
   const photos = galleryItems.filter(item => item.type === 'photo');
-
-  // Composant Carte Galerie (Réutilisable)
-  const GalleryCard = ({ item }: { item: GalleryItem }) => (
-    <div 
-      onClick={() => openLightbox(item)}
-      className="group relative bg-jam-900 rounded-2xl overflow-hidden shadow-xl border border-jam-800 hover:border-neon-pink/50 transition-all duration-300 hover:transform hover:-translate-y-2 cursor-pointer flex flex-col h-full"
-    >
-      {/* Image Area */}
-      <div className="h-48 md:h-56 w-full relative overflow-hidden">
-        <img 
-          src={item.imageUrl} 
-          alt={`Performance de ${item.artist}`}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-transparent to-transparent opacity-80"></div>
-        
-        {item.type === 'video' ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/50 group-hover:scale-110 transition-transform shadow-lg">
-              <Icons.Play className="w-6 h-6 text-white fill-white pl-1" />
-            </div>
-          </div>
-        ) : (
-          <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md px-2 py-1 rounded-full flex items-center gap-1 border border-white/10">
-            <Icons.Camera className="w-3 h-3 text-gray-200" />
-            <span className="text-[10px] font-medium text-white uppercase tracking-wide">Photo</span>
-          </div>
-        )}
-        
-        <div className="absolute bottom-3 left-3 right-3">
-          <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold shadow-sm backdrop-blur-sm border ${item.type === 'video' ? 'bg-neon-blue/80 border-neon-blue/30 text-white' : 'bg-jam-500/80 border-jam-400/30 text-white'}`}>
-            {item.style}
-          </span>
-        </div>
-      </div>
-
-      {/* Content Info */}
-      <div className="p-5 flex-1 flex flex-col bg-jam-900">
-        <h3 className="text-lg font-bold text-white group-hover:text-neon-pink transition-colors mb-1 truncate">{item.artist}</h3>
-        <p className="text-xs text-jam-400 flex items-center gap-1 mb-3">
-          <Icons.Event className="w-3 h-3" />
-          {item.event}
-        </p>
-        <p className="text-gray-400 text-sm italic border-l-2 border-jam-700 pl-3 leading-snug mt-auto line-clamp-3">
-          "{item.quote}"
-        </p>
-      </div>
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-jam-950 py-12 px-4 sm:px-6 lg:px-8">
@@ -99,7 +98,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {videos.map((item) => (
-              <GalleryCard key={item.id} item={item} />
+              <GalleryCard key={item.id} item={item} onClick={openLightbox} />
             ))}
           </div>
         </div>
@@ -118,7 +117,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           {/* Grille Photos */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {photos.map((item) => (
-              <GalleryCard key={item.id} item={item} />
+              <GalleryCard key={item.id} item={item} onClick={openLightbox} />
             ))}
           </div>
         </div>

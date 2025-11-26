@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { SongRecommendation } from "../types";
 
 // --- MODE SIMULATION INTELLIGENTE (FALLBACK) ---
@@ -60,8 +60,7 @@ export const generateSmartSetlist = async (
   await new Promise(resolve => setTimeout(resolve, 1500));
 
   // 1. TENTATIVE DE RÉCUPÉRATION DE LA CLÉ API
-  // @ts-ignore
-  const apiKey = import.meta.env?.VITE_API_KEY || process.env.VITE_API_KEY;
+  const apiKey = process.env.API_KEY;
 
   // 2. SI PAS DE CLÉ API -> MODE "SIMULATION INTELLIGENTE"
   if (!apiKey) {
@@ -78,9 +77,8 @@ export const generateSmartSetlist = async (
 
   // 3. SI CLÉ API PRÉSENTE -> APPEL RÉEL À GEMINI
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
+    const ai = new GoogleGenAI({ apiKey });
+    
     const prompt = `
       Agis comme un directeur musical professionnel pour un événement 'Vocal Jam' (Karaoké Live avec musiciens).
       
@@ -91,23 +89,37 @@ export const generateSmartSetlist = async (
       - Ambiance souhaitée: ${vibe}
 
       Génère une liste de 5 chansons idéales et variées qui correspondent à ces critères.
-      
-      Format de réponse attendu : Uniquement un tableau JSON valide.
-      Exemple de format :
-      [
-        { "title": "Titre", "artist": "Artiste", "genre": "Style", "vibe": "Ambiance", "difficulty": "Facile/Moyen/Difficile" }
-      ]
-      Ne mets pas de markdown, juste le JSON brut.
     `;
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              title: { type: Type.STRING },
+              artist: { type: Type.STRING },
+              genre: { type: Type.STRING },
+              vibe: { type: Type.STRING },
+              difficulty: { type: Type.STRING } // 'Facile' | 'Moyen' | 'Difficile'
+            }
+          }
+        }
+      }
+    });
 
-    // Nettoyage du markdown si l'IA en met (```json ...)
-    const cleanText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+    const text = response.text;
     
-    const recommendations: SongRecommendation[] = JSON.parse(cleanText);
+    if (!text) {
+      throw new Error("Réponse vide de Gemini");
+    }
+    
+    // Le texte est déjà en JSON grâce à responseMimeType: "application/json"
+    const recommendations: SongRecommendation[] = JSON.parse(text);
     return recommendations;
 
   } catch (error) {

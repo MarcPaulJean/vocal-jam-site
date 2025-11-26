@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Icons } from '../components/Icons';
 import { PageView } from '../types';
@@ -61,7 +62,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Préparation Pro</h3>
               <p className="text-gray-400 leading-relaxed">
-                Répétition en studio, choix de répertoire assisté et coaching pour une performance de 1h30 à 2h.
+                Deux parcours au choix : <strong>Interprète</strong> (Reprises) ou <strong>Créateur</strong> (Compositions). Répétition studio et coaching pour sublimer votre projet.
               </p>
             </div>
 
