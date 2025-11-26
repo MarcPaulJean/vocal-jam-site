@@ -2,8 +2,13 @@
 import React, { useState } from 'react';
 import { Icons } from '../components/Icons';
 import { contactConfig } from '../data/mockData';
+import { PageView } from '../types';
 
-export const ContactPage = () => {
+interface ContactPageProps {
+  onNavigate: (page: PageView) => void;
+}
+
+export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -171,13 +176,23 @@ export const ContactPage = () => {
           </form>
 
           <div className="mt-8 pt-8 border-t border-jam-800 grid grid-cols-2 gap-4 text-center">
-              <div className="flex flex-col items-center">
-                  <Icons.Sound className="text-neon-blue mb-2 h-6 w-6" />
-                  <span className="text-sm text-gray-400">Son Pro</span>
+              <div 
+                className="flex flex-col items-center group cursor-pointer"
+                onClick={() => onNavigate(PageView.EXPERIENCE)}
+              >
+                  <div className="p-2 rounded-lg group-hover:bg-jam-800 transition-colors">
+                    <Icons.Sound className="text-neon-blue mb-2 h-6 w-6" />
+                    <span className="text-sm text-gray-400 group-hover:text-white transition-colors">Son Pro</span>
+                  </div>
               </div>
-              <div className="flex flex-col items-center">
-                  <Icons.Screen className="text-neon-blue mb-2 h-6 w-6" />
-                  <span className="text-sm text-gray-400">Prompteur</span>
+              <div 
+                className="flex flex-col items-center group cursor-pointer"
+                onClick={() => onNavigate(PageView.EXPERIENCE)}
+              >
+                  <div className="p-2 rounded-lg group-hover:bg-jam-800 transition-colors">
+                    <Icons.Screen className="text-neon-blue mb-2 h-6 w-6" />
+                    <span className="text-sm text-gray-400 group-hover:text-white transition-colors">Prompteur</span>
+                  </div>
               </div>
           </div>
         </div>

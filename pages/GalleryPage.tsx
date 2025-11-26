@@ -2,8 +2,13 @@
 import React, { useState } from 'react';
 import { Icons } from '../components/Icons';
 import { galleryItems, GalleryItem } from '../data/mockData';
+import { PageView } from '../types';
 
-export const GalleryPage = () => {
+interface GalleryPageProps {
+  onNavigate: (page: PageView) => void;
+}
+
+export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
 
   const openLightbox = (item: GalleryItem) => {
@@ -124,7 +129,10 @@ export const GalleryPage = () => {
           <p className="text-gray-400 mb-8">
             Que ce soit pour une reprise ou une composition originale, nous documentons votre parcours.
           </p>
-          <button className="px-8 py-3 bg-jam-800 hover:bg-jam-700 text-white rounded-full font-semibold transition-colors border border-jam-600">
+          <button 
+            onClick={() => onNavigate(PageView.CONTACT)}
+            className="px-8 py-3 bg-jam-800 hover:bg-jam-700 text-white rounded-full font-semibold transition-colors border border-jam-600"
+          >
             Lancer mon projet
           </button>
         </div>

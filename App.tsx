@@ -19,11 +19,11 @@ function App() {
       case PageView.EXPERIENCE:
         return <ExperiencePage />;
       case PageView.GALLERY:
-        return <GalleryPage />;
+        return <GalleryPage onNavigate={setCurrentPage} />;
       case PageView.SETLIST_AI:
         return <SetlistGenerator />;
       case PageView.CONTACT:
-        return <ContactPage />;
+        return <ContactPage onNavigate={setCurrentPage} />;
       default:
         return <HomePage onNavigate={setCurrentPage} />;
     }
