@@ -2,8 +2,6 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { SongRecommendation } from "../types";
 
 // --- MODE SIMULATION INTELLIGENTE (FALLBACK) ---
-// Cette base de données permet à l'appli de fonctionner de manière crédible
-// même sans clé API configurée.
 const MOCK_DATABASES: Record<string, SongRecommendation[]> = {
   "Pop-Rock": [
     { title: "Bohemian Rhapsody", artist: "Queen", genre: "Rock", vibe: "Epic", difficulty: "Difficile" },
@@ -56,39 +54,25 @@ export const generateSmartSetlist = async (
   vibe: string
 ): Promise<SongRecommendation[]> => {
   
-  // Simulation d'attente pour l'effet "IA qui réfléchit"
   await new Promise(resolve => setTimeout(resolve, 1500));
 
-  // 1. TENTATIVE DE RÉCUPÉRATION DE LA CLÉ API
   const apiKey = process.env.API_KEY;
 
-  // 2. SI PAS DE CLÉ API -> MODE "SIMULATION INTELLIGENTE"
   if (!apiKey) {
     console.log("⚠️ Aucune clé API trouvée. Utilisation du mode Simulation Intelligente.");
-    
-    // On récupère la liste correspondant au genre, ou une liste par défaut
     const mockList = MOCK_DATABASES[genre] || MOCK_DATABASES["Pop-Rock"];
-    
-    // On mélange un peu la liste pour que ça paraisse dynamique
-    // et on retourne 5 éléments max
     const shuffled = [...mockList].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 5);
   }
 
-  // 3. SI CLÉ API PRÉSENTE -> APPEL RÉEL À GEMINI
   try {
-    const ai = new GoogleGenAI({ apiKey });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     
     const prompt = `
-      Agis comme un directeur musical professionnel pour un événement 'Vocal Jam' (Karaoké Live avec musiciens).
-      
-      Contexte :
-      - Genre: ${genre}
-      - Instrument/Formation: ${instrument}
-      - Niveau: ${experienceLevel}
-      - Ambiance souhaitée: ${vibe}
-
-      Génère une liste de 5 chansons idéales et variées qui correspondent à ces critères.
+      Agis comme un directeur musical professionnel pour un événement 'Vocal Jam'.
+      Contexte : Genre ${genre}, Instrument ${instrument}, Niveau ${experienceLevel}, Ambiance ${vibe}.
+      Génère une liste de 5 chansons recommandées.
+      Pour la difficulté, choisis parmi : 'Facile', 'Moyen', 'Difficile'.
     `;
 
     const response = await ai.models.generateContent({
@@ -105,26 +89,23 @@ export const generateSmartSetlist = async (
               artist: { type: Type.STRING },
               genre: { type: Type.STRING },
               vibe: { type: Type.STRING },
-              difficulty: { type: Type.STRING } // 'Facile' | 'Moyen' | 'Difficile'
-            }
-          }
-        }
+              difficulty: { type: Type.STRING }
+            },
+            required: ["title", "artist", "genre", "vibe", "difficulty"],
+          },
+        },
       }
     });
 
     const text = response.text;
-    
     if (!text) {
       throw new Error("Réponse vide de Gemini");
     }
     
-    // Le texte est déjà en JSON grâce à responseMimeType: "application/json"
-    const recommendations: SongRecommendation[] = JSON.parse(text);
-    return recommendations;
+    return JSON.parse(text) as SongRecommendation[];
 
   } catch (error) {
     console.error("Erreur Gemini (Fallback activé):", error);
-    // En cas d'erreur API, on retombe sur le mode simulation
     return MOCK_DATABASES[genre] || MOCK_DATABASES["Pop-Rock"];
   }
 };
