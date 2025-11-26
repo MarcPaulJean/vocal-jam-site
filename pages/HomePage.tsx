@@ -56,31 +56,40 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             
-            <div className="bg-jam-900/50 p-8 rounded-2xl border border-jam-700/50 hover:border-neon-pink/50 transition-colors group">
+            <div 
+              onClick={() => onNavigate(PageView.EXPERIENCE)}
+              className="bg-jam-900/50 p-8 rounded-2xl border border-jam-700/50 hover:border-neon-pink/50 transition-all duration-300 group cursor-pointer hover:bg-jam-900 hover:-translate-y-1"
+            >
               <div className="w-14 h-14 bg-jam-800 rounded-xl flex items-center justify-center mb-6 group-hover:bg-neon-pink/20 transition-colors">
                 <Icons.Music className="w-8 h-8 text-neon-pink" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Préparation Pro</h3>
+              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-neon-pink transition-colors">Préparation Pro</h3>
               <p className="text-gray-400 leading-relaxed">
-                Deux parcours au choix : <strong>Interprète</strong> (Reprises) ou <strong>Créateur</strong> (Compositions). Répétition studio et coaching pour sublimer votre projet.
+                Choisissez votre voie : <strong className="text-neon-pink">Parcours Interprète</strong> (Reprises & Covers) ou <strong className="text-neon-blue">Parcours Créateur</strong> (Compositions Originales).
               </p>
             </div>
 
-            <div className="bg-jam-900/50 p-8 rounded-2xl border border-jam-700/50 hover:border-neon-blue/50 transition-colors group">
+            <div 
+              onClick={() => onNavigate(PageView.EXPERIENCE)}
+              className="bg-jam-900/50 p-8 rounded-2xl border border-jam-700/50 hover:border-neon-blue/50 transition-all duration-300 group cursor-pointer hover:bg-jam-900 hover:-translate-y-1"
+            >
               <div className="w-14 h-14 bg-jam-800 rounded-xl flex items-center justify-center mb-6 group-hover:bg-neon-blue/20 transition-colors">
                 <Icons.Tech className="w-8 h-8 text-neon-blue" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Live Tech</h3>
+              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-neon-blue transition-colors">Live Tech</h3>
               <p className="text-gray-400 leading-relaxed">
                 Backtracks HD, prompteur synchronisé (paroles & accords), retours wedge et façade FOH.
               </p>
             </div>
 
-            <div className="bg-jam-900/50 p-8 rounded-2xl border border-jam-700/50 hover:border-jam-400/50 transition-colors group">
+            <div 
+              onClick={() => onNavigate(PageView.EXPERIENCE)}
+              className="bg-jam-900/50 p-8 rounded-2xl border border-jam-700/50 hover:border-jam-400/50 transition-all duration-300 group cursor-pointer hover:bg-jam-900 hover:-translate-y-1"
+            >
               <div className="w-14 h-14 bg-jam-800 rounded-xl flex items-center justify-center mb-6 group-hover:bg-jam-400/20 transition-colors">
                 <Icons.Community className="w-8 h-8 text-jam-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Accompagnement</h3>
+              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-jam-400 transition-colors">Accompagnement</h3>
               <p className="text-gray-400 leading-relaxed">
                 Jamais seul : Duo musical, guitare rythmique et harmonies vocales pour vous soutenir.
               </p>
