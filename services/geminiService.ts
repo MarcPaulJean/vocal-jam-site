@@ -2,9 +2,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { SongRecommendation } from "../types";
 
-// Hack pour éviter l'erreur TypeScript "Cannot find name 'process'"
-declare const process: any;
-
 // --- MODE SIMULATION INTELLIGENTE (FALLBACK) ---
 const MOCK_DATABASES: Record<string, SongRecommendation[]> = {
   "Pop-Rock": [
@@ -61,6 +58,7 @@ export const generateSmartSetlist = async (
   // Délai artificiel pour l'UX
   await new Promise(resolve => setTimeout(resolve, 1500));
 
+  // Accès sécurisé à la clé API via process.env.API_KEY comme requis par les guidelines
   const apiKey = process.env.API_KEY;
 
   if (!apiKey) {
@@ -72,11 +70,11 @@ export const generateSmartSetlist = async (
   }
 
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey });
     
     const prompt = `
       Agis comme un directeur musical professionnel.
-      Génère une liste de 5 chansons pour :
+      Génère une liste de 5 chansons au format JSON pour :
       Genre: ${genre}, Instrument: ${instrument}, Niveau: ${experienceLevel}, Ambiance: ${vibe}.
       Les difficultés possibles sont: Facile, Moyen, Difficile.
     `;
@@ -98,11 +96,11 @@ export const generateSmartSetlist = async (
               difficulty: { type: Type.STRING }
             },
             required: ["title", "artist", "genre", "vibe", "difficulty"],
-          },
-        },
-      },
+          }
+        }
+      }
     });
-
+    
     const text = response.text;
     
     if (!text) {
