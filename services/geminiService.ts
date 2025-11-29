@@ -1,6 +1,9 @@
 
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { SongRecommendation } from "../types";
+
+// Hack pour éviter l'erreur TypeScript "Cannot find name 'process'" dans Vite
+declare const process: any;
 
 // --- MODE SIMULATION INTELLIGENTE (FALLBACK) ---
 const MOCK_DATABASES: Record<string, SongRecommendation[]> = {
@@ -58,11 +61,17 @@ export const generateSmartSetlist = async (
   // Délai artificiel pour l'UX
   await new Promise(resolve => setTimeout(resolve, 1500));
 
-  // Accès sécurisé à la clé API via process.env.API_KEY comme requis par les guidelines
-  const apiKey = process.env.API_KEY;
+  // Tentative de récupération de la clé API (Compatible Vite et Vercel)
+  let apiKey = "";
+  try {
+    // @ts-ignore
+    apiKey = import.meta.env.VITE_API_KEY || (typeof process !== 'undefined' ? process.env.API_KEY : "");
+  } catch (e) {
+    console.log("Erreur lecture env var", e);
+  }
 
   if (!apiKey) {
-    console.log("⚠️ Aucune clé API trouvée (process.env.API_KEY). Utilisation du mode Simulation Intelligente.");
+    console.log("⚠️ Aucune clé API trouvée. Utilisation du mode Simulation Intelligente.");
     const mockList = MOCK_DATABASES[genre] || MOCK_DATABASES["Pop-Rock"];
     // Mélange simple
     const shuffled = [...mockList].sort(() => 0.5 - Math.random());
@@ -70,43 +79,22 @@ export const generateSmartSetlist = async (
   }
 
   try {
-    const ai = new GoogleGenAI({ apiKey });
+    // Utilisation de l'ancien SDK (@google/generative-ai) qui est stable dans le package.json
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     
     const prompt = `
       Agis comme un directeur musical professionnel.
-      Génère une liste de 5 chansons au format JSON pour :
+      Génère une liste de 5 chansons au format JSON strict (un tableau d'objets) pour :
       Genre: ${genre}, Instrument: ${instrument}, Niveau: ${experienceLevel}, Ambiance: ${vibe}.
-      Les difficultés possibles sont: Facile, Moyen, Difficile.
+      Chaque objet doit avoir les propriétés: title, artist, genre, vibe, difficulty.
+      Ne mets pas de markdown (pas de \`\`\`json). Juste le JSON brut.
     `;
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-      config: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.ARRAY,
-          items: {
-            type: Type.OBJECT,
-            properties: {
-              title: { type: Type.STRING },
-              artist: { type: Type.STRING },
-              genre: { type: Type.STRING },
-              vibe: { type: Type.STRING },
-              difficulty: { type: Type.STRING }
-            },
-            required: ["title", "artist", "genre", "vibe", "difficulty"],
-          }
-        }
-      }
-    });
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text().replace(/```json/g, '').replace(/```/g, '').trim();
     
-    const text = response.text;
-    
-    if (!text) {
-        throw new Error("Réponse vide");
-    }
-
     return JSON.parse(text) as SongRecommendation[];
 
   } catch (error) {
