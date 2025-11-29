@@ -71,7 +71,7 @@ export const galleryItems: GalleryItem[] = [
     event: "Lancement de groupe",
     type: "photo",
     quote: "Tout a commencé ici. Cette première expérience de scène avec l'accompagnement Vocal Jam nous a donné l'élan et la confiance pour créer notre propre trio. Une révélation !",
-    imageUrl: "https://img.youtube.com/vi/wUdAw8wwgMw/sddefault.jpg",
+    imageUrl: "/images/triomio.jpeg",
     style: "Succès Story",
   }
 ];
