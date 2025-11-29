@@ -64,42 +64,15 @@ export const galleryItems: GalleryItem[] = [
     videoId: "cNS6c9fKqI4"
   },
 
-  // --- PHOTOS / SOUVENIRS (4 Illustrations Principales) ---
+  // --- PHOTOS / ILS NOUS ONT FAIT CONFIANCE ---
   {
-    id: 6,
-    artist: "L'Équipe & Vous",
-    event: "Backstage",
+    id: 20,
+    artist: "Christophe & Lisa (TRIOMIO)",
+    event: "Lancement de groupe",
     type: "photo",
-    quote: "La musique, c'est d'abord une rencontre humaine. Préparation et rires avant le show.",
-    imageUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800",
-    style: "Souvenir",
-  },
-  {
-    id: 7,
-    artist: "Session Studio",
-    event: "Enregistrement",
-    type: "photo",
-    quote: "Le moment où la magie opère : quand votre composition prend vie pour la première fois.",
-    imageUrl: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=800",
-    style: "Studio",
-  },
-  {
-    id: 8,
-    artist: "Le Public",
-    event: "Soirée Privée",
-    type: "photo",
-    quote: "Ce partage d'énergie indescriptible entre l'artiste et son public.",
-    imageUrl: "https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&q=80&w=800",
-    style: "Live",
-  },
-  {
-    id: 9,
-    artist: "Duo Acoustique",
-    event: "Répétition",
-    type: "photo",
-    quote: "Trouver la bonne harmonie, le bon accord. Un travail de précision et d'écoute.",
-    imageUrl: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&q=80&w=800",
-    style: "Répétition",
+    quote: "Tout a commencé ici. Cette première expérience de scène avec l'accompagnement Vocal Jam nous a donné l'élan et la confiance pour créer notre propre trio. Une révélation !",
+    imageUrl: "https://img.youtube.com/vi/wUdAw8wwgMw/sddefault.jpg",
+    style: "Succès Story",
   }
 ];
 

@@ -70,7 +70,7 @@ function App() {
         case PageView.HOME:
           return <HomePage onNavigate={setCurrentPage} />;
         case PageView.EXPERIENCE:
-          return <ExperiencePage />;
+          return <ExperiencePage onNavigate={setCurrentPage} />;
         case PageView.GALLERY:
           return <GalleryPage onNavigate={setCurrentPage} />;
         case PageView.SETLIST_AI:

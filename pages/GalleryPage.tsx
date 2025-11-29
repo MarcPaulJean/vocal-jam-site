@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Icons } from '../components/Icons';
 import { galleryItems, GalleryItem } from '../data/mockData';
@@ -31,7 +32,7 @@ const GalleryCard: React.FC<{ item: GalleryItem; onClick: (item: GalleryItem) =>
       ) : (
         <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-md px-2 py-1 rounded-full flex items-center gap-1 border border-white/10">
           <Icons.Camera className="w-3 h-3 text-gray-200" />
-          <span className="text-[10px] font-medium text-white uppercase tracking-wide">Photo</span>
+          <span className="text-[10px] font-medium text-white uppercase tracking-wide">Story</span>
         </div>
       )}
       
@@ -103,13 +104,13 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* SECTION 2 : PHOTOS / SOUVENIRS (GRILLE SIMPLE) */}
+        {/* SECTION 2 : TÉMOIGNAGES / CONFIANCE (GRILLE SIMPLE) */}
         <div className="mb-20">
           <div className="flex items-center justify-between gap-4 mb-8">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-jam-700"></div>
             <h2 className="text-2xl font-bold text-white flex items-center gap-2 whitespace-nowrap">
               <Icons.Community className="text-jam-400" />
-              Rencontres & Souvenirs
+              Ils nous ont fait confiance
             </h2>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-jam-700"></div>
           </div>
