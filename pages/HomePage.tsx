@@ -190,6 +190,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                       </span>
                     ))}
                   </div>
+
+                  <button
+                    onClick={() => onNavigate(PageView.HOST)}
+                    className="mt-8 inline-flex items-center gap-2 text-neon-blue font-semibold hover:text-white transition-colors"
+                  >
+                    Vous gérez un de ces lieux ? Accueillez une Vocal Jam
+                    <Icons.ArrowRight className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
             </div>

@@ -15,5 +15,6 @@ export interface ServiceFeature {
 
 export enum PageView {
   HOME = 'HOME',
+  HOST = 'HOST',
   CONTACT = 'CONTACT'
 }

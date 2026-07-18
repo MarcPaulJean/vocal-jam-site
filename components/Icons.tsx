@@ -21,7 +21,14 @@ import {
   MapPin,
   Globe,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Coffee,
+  Tent,
+  PartyPopper,
+  Building2,
+  TrendingUp,
+  HeartHandshake,
+  Sprout
 } from 'lucide-react';
 
 export const Icons = {
@@ -45,5 +52,12 @@ export const Icons = {
   Location: MapPin,
   Website: Globe,
   ArrowLeft: ChevronLeft,
-  ArrowRight: ChevronRight
+  ArrowRight: ChevronRight,
+  Coffee: Coffee,
+  Tent: Tent,
+  Party: PartyPopper,
+  Business: Building2,
+  Trending: TrendingUp,
+  Handshake: HeartHandshake,
+  Sprout: Sprout
 };

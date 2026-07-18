@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
+import { HostPage } from './pages/HostPage';
 import { ContactPage } from './pages/ContactPage';
 import { PageView } from './types';
 
@@ -20,6 +21,8 @@ function App() {
       switch (currentPage) {
         case PageView.HOME:
           return <HomePage onNavigate={setCurrentPage} />;
+        case PageView.HOST:
+          return <HostPage onNavigate={setCurrentPage} />;
         case PageView.CONTACT:
           return <ContactPage onNavigate={setCurrentPage} />;
         default:
