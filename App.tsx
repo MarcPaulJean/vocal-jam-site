@@ -3,10 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
-import { ExperiencePage } from './pages/ExperiencePage';
-import { SetlistGenerator } from './pages/SetlistGenerator';
 import { ContactPage } from './pages/ContactPage';
-import { GalleryPage } from './pages/GalleryPage';
 import { PageView } from './types';
 
 function App() {
@@ -23,12 +20,6 @@ function App() {
       switch (currentPage) {
         case PageView.HOME:
           return <HomePage onNavigate={setCurrentPage} />;
-        case PageView.EXPERIENCE:
-          return <ExperiencePage onNavigate={setCurrentPage} />;
-        case PageView.GALLERY:
-          return <GalleryPage onNavigate={setCurrentPage} />;
-        case PageView.SETLIST_AI:
-          return <SetlistGenerator />;
         case PageView.CONTACT:
           return <ContactPage onNavigate={setCurrentPage} />;
         default:

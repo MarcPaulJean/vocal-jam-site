@@ -10,7 +10,6 @@ export const Footer = () => (
       <div className="mt-4 flex justify-center space-x-6">
         <span className="text-gray-500 text-xs">Technologie Live Karaoké</span>
         <span className="text-gray-500 text-xs">Audio Pro</span>
-        <span className="text-gray-500 text-xs">Powered by Gemini</span>
       </div>
     </div>
   </footer>

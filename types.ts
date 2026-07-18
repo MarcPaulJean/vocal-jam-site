@@ -15,8 +15,5 @@ export interface ServiceFeature {
 
 export enum PageView {
   HOME = 'HOME',
-  EXPERIENCE = 'EXPERIENCE',
-  SETLIST_AI = 'SETLIST_AI',
-  GALLERY = 'GALLERY',
   CONTACT = 'CONTACT'
 }

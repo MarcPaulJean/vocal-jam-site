@@ -178,7 +178,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           <div className="mt-8 pt-8 border-t border-jam-800 grid grid-cols-2 gap-4 text-center">
               <div 
                 className="flex flex-col items-center group cursor-pointer"
-                onClick={() => onNavigate(PageView.EXPERIENCE)}
+                onClick={() => onNavigate(PageView.HOME)}
               >
                   <div className="p-2 rounded-lg group-hover:bg-jam-800 transition-colors">
                     <Icons.Sound className="text-neon-blue mb-2 h-6 w-6" />
@@ -187,7 +187,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               </div>
               <div 
                 className="flex flex-col items-center group cursor-pointer"
-                onClick={() => onNavigate(PageView.EXPERIENCE)}
+                onClick={() => onNavigate(PageView.HOME)}
               >
                   <div className="p-2 rounded-lg group-hover:bg-jam-800 transition-colors">
                     <Icons.Screen className="text-neon-blue mb-2 h-6 w-6" />
