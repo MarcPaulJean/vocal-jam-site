@@ -5,10 +5,7 @@ import { PageView } from '../types';
 
 // Images d'illustration (Unsplash) - URLs mises à jour pour forcer le rafraîchissement
 const IMG_INTERPRETE = "https://images.unsplash.com/photo-1525362081669-2b476bb628c3?auto=format&fit=crop&q=80&w=800"; // Chanteuse émotion micro
-const IMG_CREATEUR = "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=800"; // Studio (inchangé)
 const IMG_TERRASSE = "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?auto=format&fit=crop&q=80&w=1200"; // Terrasse (inchangé)
-const IMG_TECH = "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&q=80&w=800"; // Main sur table de mixage
-const IMG_PERFORMANCE = "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&q=80&w=800"; // Scène lumières concert
 
 interface ExperiencePageProps {
   onNavigate?: (page: PageView) => void;
@@ -51,12 +48,12 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onNavigate }) =>
               </div>
               <h3 className="text-3xl font-bold text-white mb-4">1. La Préparation</h3>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Deux parcours, une même ambition : vous faire monter en niveau comme un artiste accompagné.
+                Un parcours pensé pour vous faire monter en niveau comme un artiste accompagné.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              
+            <div className="max-w-xl mx-auto">
+
               {/* Parcours A : Interprète */}
               <div className="group bg-jam-900 rounded-3xl overflow-hidden border border-jam-800 hover:border-neon-pink/50 transition-all duration-300 shadow-xl flex flex-col h-full">
                 <div className="h-64 overflow-hidden relative">
@@ -93,134 +90,6 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onNavigate }) =>
                 </div>
               </div>
 
-              {/* Parcours B : Créateur */}
-              <div className="group bg-jam-900 rounded-3xl overflow-hidden border border-jam-800 hover:border-neon-blue/50 transition-all duration-300 shadow-xl flex flex-col h-full">
-                <div className="h-64 overflow-hidden relative">
-                  <img src={IMG_CREATEUR} alt="Studio Enregistrement" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-jam-900 via-transparent to-transparent opacity-80"></div>
-                  <div className="absolute bottom-4 left-6">
-                    <span className="bg-neon-blue/90 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">En Studio</span>
-                  </div>
-                </div>
-                <div className="p-8 flex-1 flex flex-col">
-                  <h4 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                    <span className="text-neon-blue">B.</span> Parcours Créateur
-                  </h4>
-                  <p className="text-gray-300 mb-6 font-medium">
-                    Vous avez des textes, des idées, une mélodie dans la tête ? Nous sommes là pour leur donner vie.
-                  </p>
-                  <p className="text-sm text-gray-400 mb-4">Ce parcours vous offre :</p>
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {[
-                      "Une aide à la composition (paroles et musique).",
-                      "Des arrangements sur mesure pour révéler votre identité.",
-                      "Une direction artistique personnalisée pour guider votre vision.",
-                      "L’enregistrement d’une maquette studio, propre et exploitable."
-                    ].map((detail, idx) => (
-                      <li key={idx} className="flex items-start text-gray-300 text-sm">
-                        <Icons.Energy className="w-4 h-4 text-neon-blue mt-0.5 mr-3 flex-shrink-0" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="pt-6 border-t border-jam-800 text-center mt-auto">
-                    <p className="text-white italic font-medium">"Venez avec une idée, repartez avec votre création."</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* --- 2. LA TECHNOLOGIE --- */}
-          <div className="flex flex-col md:flex-row gap-12 items-center bg-jam-900/50 rounded-3xl p-8 md:p-12 border border-jam-800">
-            <div className="flex-1 order-2 md:order-1">
-              <h3 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                <span className="bg-jam-800 p-2 rounded-lg"><Icons.Tech className="w-6 h-6 text-neon-blue" /></span>
-                2. La Technologie
-              </h3>
-              <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                Le soutien invisible qui fait toute la différence. Pour nous, la technique n’est pas un gadget. Elle est là pour que vous vous sentiez en sécurité, concentré uniquement sur votre performance.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
-                {[
-                  { title: "Prompteur numérique", desc: "Paroles et accords synchronisés, pour ne jamais perdre le fil." },
-                  { title: "Retours Wedge", desc: "Pour vous entendre parfaitement, comme sur scène." },
-                  { title: "Sonorisation Façade", desc: "Un son FOH puissant qui donne un vrai rendu public." },
-                  { title: "Mixage en temps réel", desc: "Un ingénieur dédié pour que votre voix soit toujours mise en valeur." }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex flex-col">
-                    <dt className="flex items-center text-white font-semibold text-sm mb-1">
-                      <span className="w-2 h-2 rounded-full bg-neon-blue mr-2"></span>
-                      {item.title}
-                    </dt>
-                    <dd className="text-gray-400 text-xs pl-4">{item.desc}</dd>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-8 text-jam-400 italic text-sm">
-                "Tout est pensé pour que vous soyez à l’aise, vous libérer et vous mettre dans le meilleur état d’esprit."
-              </p>
-            </div>
-            <div className="flex-shrink-0 w-full md:w-1/2 lg:w-5/12 order-1 md:order-2 flex justify-center">
-               <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-jam-700/50 group">
-                  <img 
-                    src={IMG_TECH} 
-                    alt="Ingénieur son sur console de mixage" 
-                    className="w-full h-full object-cover aspect-video transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-jam-900/60 to-transparent"></div>
-                  <div className="absolute bottom-3 right-4 flex items-center gap-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                    <span className="text-xs text-white font-mono uppercase tracking-widest">Live System</span>
-                  </div>
-               </div>
-            </div>
-          </div>
-
-          {/* --- 3. LA PERFORMANCE --- */}
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-             <div className="flex-shrink-0 w-full md:w-1/2 lg:w-5/12 flex justify-center">
-               <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-jam-700/50 group">
-                  <img 
-                    src={IMG_PERFORMANCE} 
-                    alt="Concert Live Lumières" 
-                    className="w-full h-full object-cover aspect-video transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-jam-900/60 to-transparent"></div>
-                  <div className="absolute bottom-3 left-4 flex items-center gap-2">
-                    <span className="text-xs text-white font-bold bg-neon-pink/80 px-2 py-1 rounded">ON AIR</span>
-                  </div>
-               </div>
-            </div>
-            <div className="flex-1">
-              <h3 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                <span className="bg-jam-800 p-2 rounded-lg"><Icons.Star className="w-6 h-6 text-jam-400" /></span>
-                3. La Performance
-              </h3>
-              <p className="text-xl text-white font-medium mb-4">
-                "Le moment de vérité, mais bien entouré."
-              </p>
-              <p className="text-gray-300 mb-6">
-                C’est l’instant où tout se joue. Le premier accord. Votre respiration qui se cale. La lumière qui vous trouve. Et cette énergie toute singulière qui monte.
-              </p>
-              <p className="text-gray-300 mb-4">Nous sommes là pour vous entourer :</p>
-              <ul className="space-y-3 mb-8">
-                {[
-                  "Accompagnement guitare live qui suit votre rythme et vos nuances.",
-                  "Harmonies vocales qui enrichissent votre voix sans la couvrir.",
-                  "Éclairage scénique dynamique pour vous mettre en valeur.",
-                  "Captation photo/vidéo pour immortaliser votre performance."
-                ].map((detail, idx) => (
-                  <li key={idx} className="flex items-center text-gray-300">
-                    <Icons.Play className="w-4 h-4 text-jam-400 mr-3 flex-shrink-0" />
-                    {detail}
-                  </li>
-                ))}
-              </ul>
-              <div className="bg-gradient-to-r from-jam-900 to-transparent p-4 border-l-4 border-jam-500">
-                <p className="text-white italic">"Ressentez l’adrénaline, la présence. Le frisson de la scène."</p>
-              </div>
             </div>
           </div>
 
