@@ -118,9 +118,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-jam-900 border border-jam-700 mb-4 shadow-[0_0_15px_rgba(118,75,162,0.3)]">
                   <Icons.Music className="w-8 h-8 text-neon-pink" />
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-4">1. La Préparation</h3>
+                <h3 className="text-3xl font-bold text-white mb-4">De la répète à la scène</h3>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Un parcours pensé pour vous faire monter en niveau comme un artiste accompagné.
+                  Chanteur ou instrumentiste, en solo : vous montez en niveau comme un artiste accompagné, du premier essai jusqu'aux projecteurs.
                 </p>
               </div>
 
@@ -137,18 +137,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   </div>
                   <div className="p-8 flex-1 flex flex-col">
                     <h4 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                      <span className="text-neon-pink">A.</span> Parcours Interprète
+                      Soliste, jamais seul
                     </h4>
                     <p className="text-gray-300 mb-6 font-medium">
-                      Vous rêvez d’interpréter les grands titres que vous aimez, avec un rendu pro et un vrai soutien musical ?
+                      Vous rêvez d’interpréter les titres que vous aimez — à la voix ou à votre instrument — avec un rendu pro et un vrai soutien musical ?
                     </p>
                     <p className="text-sm text-gray-400 mb-4">Avec ce parcours, vous allez :</p>
                     <ul className="space-y-3 mb-8 flex-1">
                       {[
-                        "Découvrir une sélection de 30+ titres adaptés à votre voix.",
-                        "Accéder à une bibliothèque de Backtracks Pro (son studio, pas karaoké).",
-                        "Bénéficier d’un coaching scénique pour gagner en confiance.",
-                        "Répéter en conditions live, porté par l'accompagnement."
+                        "Une sélection de 30+ titres adaptés à votre voix ou à votre instrument.",
+                        "Une bibliothèque de Backtracks Pro : un vrai son studio, pas du karaoké.",
+                        "Un coaching scénique pour gagner en confiance et en présence.",
+                        "Des répétitions en conditions live, porté par l'accompagnement."
                       ].map((detail, idx) => (
                         <li key={idx} className="flex items-start text-gray-300 text-sm">
                           <Icons.Star className="w-4 h-4 text-neon-pink mt-0.5 mr-3 flex-shrink-0" />
@@ -177,7 +177,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
                 <div className="max-w-3xl mx-auto">
                   <p className="text-xl text-gray-200 leading-relaxed font-light italic mb-8">
-                    "Imaginez... Le soleil qui se couche sur une terrasse. Vous chantez cette première note. Les conversations s’interrompent. D’abord petit à petit, puis tout d’un coup. Le temps s’arrête l’espace d’un instant, et le public se met à chanter avec vous. C’est aussi ça l'expérience Vocal Jam."
+                    "Imaginez... Le soleil qui se couche sur une terrasse. Vous lancez cette première note. Les conversations s’interrompent. D’abord petit à petit, puis tout d’un coup. Le temps s’arrête l’espace d’un instant, et le public se met à chanter avec vous. C’est aussi ça l'expérience Vocal Jam."
                   </p>
                   <p className="text-gray-400 mb-8">
                     Nous vous suivons partout où un public peut vous écouter.
@@ -196,7 +196,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
             {/* --- CTA FINAL --- */}
             <div className="text-center py-12">
-              <h3 className="text-2xl font-bold text-white mb-6">Prêt à vivre l'expérience ?</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Chanteur ou instrumentiste : la scène vous attend.</h3>
               <button
                 onClick={() => onNavigate(PageView.CONTACT)}
                 className="px-10 py-4 bg-gradient-to-r from-neon-pink to-jam-600 hover:from-neon-pink hover:to-jam-500 text-white text-lg font-bold rounded-full shadow-[0_0_20px_rgba(255,0,128,0.3)] hover:scale-105 transition-transform"
