@@ -189,15 +189,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="mt-12 rounded-2xl border border-neon-pink/40 bg-jam-950/60 backdrop-blur-sm p-6 sm:p-8 max-w-2xl mx-auto">
-                    <p className="text-lg sm:text-xl text-white font-semibold mb-5">
-                      Vous gérez un de ces lieux ?
+                    <p className="text-lg sm:text-xl text-white font-semibold mb-2">
+                      Vocal Jam, c'est aussi pour les lieux qui accueillent la scène.
+                    </p>
+                    <p className="text-gray-400 mb-5">
+                      Cafés, campings, fêtes, événements : découvrez tout l'intérêt d'accueillir une soirée.
                     </p>
                     <button
                       onClick={() => onNavigate(PageView.HOST)}
                       className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_25px_rgba(255,0,128,0.45)] hover:scale-105 transition-transform"
                     >
                       <Icons.Handshake className="w-6 h-6" />
-                      Accueillez une Vocal Jam
+                      Accueillir une Vocal Jam
                       <Icons.ArrowRight className="w-5 h-5" />
                     </button>
                   </div>
