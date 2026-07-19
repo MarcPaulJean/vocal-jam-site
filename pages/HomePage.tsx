@@ -61,9 +61,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* Image illustration immersive (clic = descend vers l'expérience) */}
+      {/* Image illustration immersive */}
       <div className="relative z-10 mt-8 pb-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-jam-700 group cursor-pointer" onClick={scrollToExperience}>
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-jam-700 group">
           <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-transparent to-transparent z-10 opacity-40"></div>
 
           <img
@@ -76,9 +76,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <p className="text-2xl md:text-3xl font-bold text-white italic drop-shadow-lg">
               "Fermez les yeux. Le public est là. La musique démarre. C'est à vous."
             </p>
-            <div className="mt-4 inline-flex items-center text-neon-pink font-semibold animate-bounce">
-              En savoir plus <Icons.ArrowRight className="ml-2 w-5 h-5" />
-            </div>
           </div>
         </div>
       </div>
@@ -191,13 +188,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     ))}
                   </div>
 
-                  <button
-                    onClick={() => onNavigate(PageView.HOST)}
-                    className="mt-8 inline-flex items-center gap-2 text-neon-blue font-semibold hover:text-white transition-colors"
-                  >
-                    Vous gérez un de ces lieux ? Accueillez une Vocal Jam
-                    <Icons.ArrowRight className="w-5 h-5" />
-                  </button>
+                  <div className="mt-12 rounded-2xl border border-neon-pink/40 bg-jam-950/60 backdrop-blur-sm p-6 sm:p-8 max-w-2xl mx-auto">
+                    <p className="text-lg sm:text-xl text-white font-semibold mb-5">
+                      Vous gérez un de ces lieux ?
+                    </p>
+                    <button
+                      onClick={() => onNavigate(PageView.HOST)}
+                      className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_25px_rgba(255,0,128,0.45)] hover:scale-105 transition-transform"
+                    >
+                      <Icons.Handshake className="w-6 h-6" />
+                      Accueillez une Vocal Jam
+                      <Icons.ArrowRight className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
