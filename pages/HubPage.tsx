@@ -62,7 +62,7 @@ export const HubPage: React.FC<HubPageProps> = ({ onNavigate }) => {
             Jamais seul, toujours ensemble
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-tight">
+          <h1 className="font-display text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
             La scène live,<br />
             <span className="text-neon-pink">ça se vit à plusieurs</span>
           </h1>
@@ -79,7 +79,7 @@ export const HubPage: React.FC<HubPageProps> = ({ onNavigate }) => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
               Trois façons de vivre <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">Vocal Jam</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">

@@ -56,7 +56,7 @@ export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) 
             Le public est acteur
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-tight">
+          <h1 className="font-display text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
             Live <span className="text-neon-pink">Jukebox</span>
           </h1>
 
@@ -88,7 +88,7 @@ export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) 
       <section id="comment" className="py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
               Le public entre <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">en scène</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -167,7 +167,7 @@ export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) 
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-jam-900 to-jam-800 border border-jam-700 p-10 md:p-16 text-center">
             <div className="absolute inset-0 bg-gradient-to-r from-neon-pink/10 to-neon-blue/10"></div>
             <div className="relative z-10">
-              <h2 className="font-display text-3xl md:text-4xl font-extrabold text-white mb-4">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
                 Offrez à votre public une soirée dont il est la vedette.
               </h2>
               <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">

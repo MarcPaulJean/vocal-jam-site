@@ -34,7 +34,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
             Vivez le frisson de la scène
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
             Vous n'êtes plus seul <br />
             <span className="text-neon-pink">sous les projecteurs</span>
           </h1>
@@ -90,7 +90,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
           <div className="text-center mb-20 relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-r from-neon-pink/10 to-neon-blue/10 blur-3xl rounded-full -z-10"></div>
 
-            <h2 className="text-4xl font-extrabold text-white sm:text-5xl mb-8">
+            <h2 className="text-4xl font-bold text-white sm:text-5xl mb-8">
               L'Expérience <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">Vocal Jam</span>
             </h2>
 
