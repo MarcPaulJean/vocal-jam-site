@@ -9,6 +9,16 @@ import { LiveJukeboxPage } from './pages/LiveJukeboxPage';
 import { ContactPage } from './pages/ContactPage';
 import { PageView, ReservationContext, NavigateFn } from './types';
 
+// Titre d'onglet par page (SEO). L'accueil garde la tagline principale ;
+// chaque pilier a son propre titre, dont le Live Jukebox.
+const PAGE_TITLES: Record<PageView, string> = {
+  [PageView.HOME]: "Vocal Jam — L'Expérience de la scène",
+  [PageView.MUSICIANS]: 'Les musiciens — Vocal Jam',
+  [PageView.HOST]: 'Accueillir une Vocal Jam — Les hôtes',
+  [PageView.LIVEJUKEBOX]: 'Live Jukebox — Vocal Jam',
+  [PageView.CONTACT]: 'Réserver — Vocal Jam',
+};
+
 function App() {
   const [currentPage, setCurrentPage] = useState<PageView>(PageView.HOME);
   const [reservationContext, setReservationContext] = useState<ReservationContext>('');
@@ -21,9 +31,11 @@ function App() {
     setCurrentPage(page);
   };
 
-  // Remonter en haut de page à chaque changement
+  // Remonter en haut de page et mettre à jour le titre d'onglet à chaque
+  // changement de page (SEO + partage).
   useEffect(() => {
     window.scrollTo(0, 0);
+    document.title = PAGE_TITLES[currentPage] ?? "Vocal Jam — L'Expérience de la scène";
   }, [currentPage]);
 
   const renderPage = () => {
