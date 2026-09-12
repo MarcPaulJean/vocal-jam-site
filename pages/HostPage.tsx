@@ -65,7 +65,7 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
             Vous avez un lieu ? Donnez-lui une scène.
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-tight">
+          <h1 className="text-4xl md:text-6xl leading-[1.1] font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
             Accueillez une <span className="text-neon-pink">Vocal Jam</span>
           </h1>
 
@@ -90,7 +90,7 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
       <section id="pourquoi" className="py-20 scroll-mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Pourquoi accueillir une <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">Vocal Jam</span> ?
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -123,12 +123,12 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
               <p className="text-sm uppercase tracking-widest text-neon-blue font-semibold mb-6">L’effet tribu, en chiffres</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
                 <div>
-                  <p className="text-6xl md:text-7xl font-extrabold text-neon-pink leading-none">5</p>
+                  <p className="text-6xl md:text-7xl font-bold text-neon-pink leading-none">5</p>
                   <p className="text-gray-300 mt-2 font-medium">talents sur scène</p>
                 </div>
                 <Icons.ArrowRight className="w-10 h-10 text-jam-400 rotate-90 sm:rotate-0" />
                 <div>
-                  <p className="text-6xl md:text-7xl font-extrabold text-neon-blue leading-none">20-30</p>
+                  <p className="text-6xl md:text-7xl font-bold text-neon-blue leading-none">20-30</p>
                   <p className="text-gray-300 mt-2 font-medium">spectateurs, au minimum</p>
                 </div>
               </div>
@@ -203,7 +203,7 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-jam-900 to-jam-800 border border-jam-700 p-10 md:p-16 text-center">
             <div className="absolute inset-0 bg-gradient-to-r from-neon-pink/10 to-neon-blue/10"></div>
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                 Votre lieu a une âme. Donnez-lui une scène.
               </h2>
               <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
