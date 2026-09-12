@@ -7,3 +7,11 @@ body {
   color: #f3f4f6;
   font-family: 'Inter', sans-serif;
 }
+
+/* Police d'accent (Syne) sur les titres. */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: 'Syne', 'Inter', sans-serif;
+}

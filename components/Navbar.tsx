@@ -13,7 +13,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   const navItems = [
     { label: 'Accueil', page: PageView.HOME, icon: Icons.Star },
-    { label: 'Accueillir une Vocal Jam', page: PageView.HOST, icon: Icons.Handshake },
     { label: 'Réserver', page: PageView.CONTACT, icon: Icons.Event },
   ];
 

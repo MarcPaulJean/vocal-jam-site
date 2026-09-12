@@ -8,7 +8,7 @@ export const Footer = () => (
         <span className="block sm:inline sm:ml-2">Libérez l'artiste en vous.</span>
       </p>
       <div className="mt-4 flex justify-center space-x-6">
-        <span className="text-gray-500 text-xs">Technologie Live Karaoké</span>
+        <span className="text-gray-500 text-xs">Backtracks Pro</span>
         <span className="text-gray-500 text-xs">Audio Pro</span>
       </div>
     </div>

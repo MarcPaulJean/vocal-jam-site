@@ -7,11 +7,11 @@ import { PageView } from '../types';
 const IMG_INTERPRETE = "https://images.unsplash.com/photo-1525362081669-2b476bb628c3?auto=format&fit=crop&q=80&w=800"; // Chanteuse émotion micro
 const IMG_TERRASSE = "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?auto=format&fit=crop&q=80&w=1200"; // Terrasse
 
-interface HomePageProps {
+interface MusiciansPageProps {
   onNavigate: (page: PageView) => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
   const scrollToExperience = () => {
     document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -40,7 +40,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </h1>
 
           <p className="mt-4 max-w-2xl text-xl text-gray-300 mx-auto">
-            Vocal Jam transforme votre rêve en réalité. Chantez ou jouez en solo, accompagné par des pros, avec un son de qualité studio et une technologie de pointe.
+            Vocal Jam transforme votre rêve en réalité. Chantez ou jouez, toujours accompagné par des pros, avec un son de qualité studio et une technologie de pointe.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-2xl">
@@ -117,7 +117,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </div>
                 <h3 className="text-3xl font-bold text-white mb-4">De la répète à la scène</h3>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                  Chanteur ou instrumentiste, en solo : vous montez en niveau comme un artiste accompagné, du premier essai jusqu'aux projecteurs.
+                  Chanteur ou instrumentiste : vous montez en niveau comme un artiste accompagné, du premier essai jusqu'aux projecteurs.
                 </p>
               </div>
 

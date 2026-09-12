@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { HomePage } from './pages/HomePage';
+import { HubPage } from './pages/HubPage';
+import { MusiciansPage } from './pages/MusiciansPage';
 import { HostPage } from './pages/HostPage';
+import { LiveJukeboxPage } from './pages/LiveJukeboxPage';
 import { ContactPage } from './pages/ContactPage';
 import { PageView } from './types';
 
@@ -20,13 +22,17 @@ function App() {
     const content = (() => {
       switch (currentPage) {
         case PageView.HOME:
-          return <HomePage onNavigate={setCurrentPage} />;
+          return <HubPage onNavigate={setCurrentPage} />;
+        case PageView.MUSICIANS:
+          return <MusiciansPage onNavigate={setCurrentPage} />;
         case PageView.HOST:
           return <HostPage onNavigate={setCurrentPage} />;
+        case PageView.LIVEJUKEBOX:
+          return <LiveJukeboxPage onNavigate={setCurrentPage} />;
         case PageView.CONTACT:
           return <ContactPage onNavigate={setCurrentPage} />;
         default:
-          return <HomePage onNavigate={setCurrentPage} />;
+          return <HubPage onNavigate={setCurrentPage} />;
       }
     })();
 
