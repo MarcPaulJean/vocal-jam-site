@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { Icons } from '../components/Icons';
-import { PageView } from '../types';
+import { PageView, NavigateFn } from '../types';
 
 // Image d'illustration (Unsplash)
 const IMG_TERRASSE = "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?auto=format&fit=crop&q=80&w=1600"; // Terrasse en soirée
 
 interface HostPageProps {
-  onNavigate: (page: PageView) => void;
+  onNavigate: NavigateFn;
 }
 
 const venues = [
@@ -75,7 +75,7 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
 
           <div className="mt-10 flex justify-center w-full">
             <button
-              onClick={() => onNavigate(PageView.CONTACT)}
+              onClick={() => onNavigate(PageView.CONTACT, 'hotes')}
               className="px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_20px_rgba(255,0,128,0.4)] hover:scale-105 transition-transform"
             >
               Proposer mon lieu
@@ -210,7 +210,7 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
                 Parlons de votre projet, sans engagement. On étudie ensemble la date, le lieu et le déroulé de votre première soirée Vocal Jam.
               </p>
               <button
-                onClick={() => onNavigate(PageView.CONTACT)}
+                onClick={() => onNavigate(PageView.CONTACT, 'hotes')}
                 className="px-10 py-4 bg-gradient-to-r from-neon-pink to-jam-600 hover:from-neon-pink hover:to-jam-500 text-white text-lg font-bold rounded-full shadow-[0_0_20px_rgba(255,0,128,0.3)] hover:scale-105 transition-transform"
               >
                 Proposer mon lieu

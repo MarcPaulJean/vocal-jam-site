@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { Icons } from '../components/Icons';
-import { PageView } from '../types';
+import { PageView, NavigateFn } from '../types';
 
 interface LiveJukeboxPageProps {
-  onNavigate: (page: PageView) => void;
+  onNavigate: NavigateFn;
 }
 
 const IMG_PUBLIC = "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&q=80&w=1600"; // Public en concert
@@ -66,7 +66,7 @@ export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) 
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-2xl">
             <button
-              onClick={() => onNavigate(PageView.CONTACT)}
+              onClick={() => onNavigate(PageView.CONTACT, 'livejukebox')}
               className="px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_20px_rgba(255,0,128,0.4)] hover:scale-105 transition-transform"
             >
               Réserver un Live Jukebox
@@ -174,7 +174,7 @@ export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) 
                 On étudie ensemble la date, le lieu et le déroulé de votre Live Jukebox.
               </p>
               <button
-                onClick={() => onNavigate(PageView.CONTACT)}
+                onClick={() => onNavigate(PageView.CONTACT, 'livejukebox')}
                 className="px-10 py-4 bg-gradient-to-r from-neon-pink to-jam-600 hover:from-neon-pink hover:to-jam-500 text-white text-lg font-bold rounded-full shadow-[0_0_20px_rgba(255,0,128,0.3)] hover:scale-105 transition-transform"
               >
                 Réserver un Live Jukebox

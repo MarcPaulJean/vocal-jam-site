@@ -1,14 +1,14 @@
 
 import React from 'react';
 import { Icons } from '../components/Icons';
-import { PageView } from '../types';
+import { PageView, NavigateFn } from '../types';
 
 // Images d'illustration (Unsplash)
 const IMG_INTERPRETE = "https://images.unsplash.com/photo-1525362081669-2b476bb628c3?auto=format&fit=crop&q=80&w=800"; // Chanteuse émotion micro
 const IMG_TERRASSE = "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?auto=format&fit=crop&q=80&w=1200"; // Terrasse
 
 interface MusiciansPageProps {
-  onNavigate: (page: PageView) => void;
+  onNavigate: NavigateFn;
 }
 
 export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
@@ -51,7 +51,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
               Découvrir l'expérience
             </button>
             <button
-              onClick={() => onNavigate(PageView.CONTACT)}
+              onClick={() => onNavigate(PageView.CONTACT, 'musiciens')}
               className="px-8 py-4 rounded-full border border-jam-500 text-jam-100 font-semibold text-lg hover:bg-jam-800 transition-colors flex items-center justify-center gap-2"
             >
               <Icons.Event className="w-5 h-5 text-neon-blue" />
@@ -212,7 +212,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
             <div className="text-center py-12">
               <h3 className="text-2xl font-bold text-white mb-6">Chanteur ou instrumentiste : la scène vous attend.</h3>
               <button
-                onClick={() => onNavigate(PageView.CONTACT)}
+                onClick={() => onNavigate(PageView.CONTACT, 'musiciens')}
                 className="px-10 py-4 bg-gradient-to-r from-neon-pink to-jam-600 hover:from-neon-pink hover:to-jam-500 text-white text-lg font-bold rounded-full shadow-[0_0_20px_rgba(255,0,128,0.3)] hover:scale-105 transition-transform"
               >
                 Réserver ma session

@@ -2,21 +2,37 @@
 import React, { useState } from 'react';
 import { Icons } from '../components/Icons';
 import { contactConfig } from '../data/mockData';
-import { PageView } from '../types';
+import { PageView, NavigateFn, ReservationContext } from '../types';
 
 interface ContactPageProps {
-  onNavigate: (page: PageView) => void;
+  onNavigate: NavigateFn;
+  context?: ReservationContext;
 }
 
-export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
-  const [formData, setFormData] = useState({
+// Objets possibles de la demande, avec des libellés lisibles pour l'email.
+const OBJETS: { value: string; label: string }[] = [
+  { value: 'musiciens', label: 'Monter sur scène (musicien)' },
+  { value: 'hotes', label: 'Accueillir une Vocal Jam (lieu)' },
+  { value: 'livejukebox', label: 'Organiser un Live Jukebox' },
+  { value: 'autre', label: 'Autre' },
+];
+
+export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, context }) => {
+  const [formData, setFormData] = useState<{
+    name: string;
+    email: string;
+    objet: string;
+    instrument: string;
+    message: string;
+  }>({
     name: '',
     email: '',
+    objet: context ?? '',
     instrument: '',
     message: ''
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -27,8 +43,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     e.preventDefault();
     
     // Création du sujet et du corps de l'email
-    const subject = `Demande de réservation Vocal Jam - ${formData.name}`;
-    const body = `Nom: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0AInstrument: ${formData.instrument}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+    const objetLabel = OBJETS.find((o) => o.value === formData.objet)?.label ?? 'Non précisé';
+    const subject = `Demande Vocal Jam (${objetLabel}) - ${formData.name}`;
+    const body = `Objet: ${objetLabel}%0D%0ANom: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0AInstrument / Voix: ${formData.instrument}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
     
     // Ouverture du client mail par défaut
     window.location.href = `mailto:${contactConfig.email}?subject=${subject}&body=${body}`;
@@ -137,6 +154,23 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   placeholder="vous@exemple.com" 
                 />
               </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-300">Votre demande concerne</label>
+              <select
+                name="objet"
+                value={formData.objet}
+                onChange={handleChange}
+                required
+                style={{ backgroundColor: '#1a0b2e', color: '#ffffff' }}
+                className="mt-1 block w-full rounded-lg border border-jam-700 px-4 py-3 focus:ring-neon-pink focus:border-neon-pink outline-none transition-colors"
+              >
+                <option value="">— Choisissez —</option>
+                {OBJETS.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
             </div>
 
             <div>

@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
 import { Icons } from './Icons';
-import { PageView } from '../types';
+import { PageView, NavigateFn } from '../types';
 
 interface NavbarProps {
   currentPage: PageView;
-  onNavigate: (page: PageView) => void;
+  onNavigate: NavigateFn;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {

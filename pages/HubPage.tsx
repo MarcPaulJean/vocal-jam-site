@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { Icons } from '../components/Icons';
-import { PageView } from '../types';
+import { PageView, NavigateFn } from '../types';
 
 interface HubPageProps {
-  onNavigate: (page: PageView) => void;
+  onNavigate: NavigateFn;
 }
 
 // Les trois « portes » du hub : chaque rôle a sa page-pilier et sa teinte.
