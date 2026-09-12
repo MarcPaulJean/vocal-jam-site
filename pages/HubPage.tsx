@@ -121,8 +121,8 @@ export const HubPage: React.FC<HubPageProps> = ({ onNavigate }) => {
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-jam-900 to-jam-800 border border-jam-700 p-10 md:p-14 text-center">
             <div className="absolute inset-0 bg-gradient-to-r from-neon-pink/10 to-neon-blue/10"></div>
             <div className="relative z-10">
-              <p className="font-display text-2xl md:text-3xl font-bold text-white mb-4">
-                Une scène. Trois manières d'y être. Zéro spectateur passif.
+              <p className="font-display text-2xl md:text-3xl font-bold text-white mb-4 text-balance">
+                Une scène. Trois manières d'y être.<br />Zéro spectateur passif.
               </p>
               <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
                 Un projet, une envie, une date ? Parlons-en — on trouve ensemble la formule qui vous ressemble.
