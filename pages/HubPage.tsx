@@ -62,7 +62,7 @@ export const HubPage: React.FC<HubPageProps> = ({ onNavigate }) => {
             Jamais seul, toujours ensemble
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
+          <h1 className="font-display text-5xl md:text-7xl leading-[1.1] font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
             La scène live,<br />
             <span className="text-neon-pink">ça se vit à plusieurs</span>
           </h1>

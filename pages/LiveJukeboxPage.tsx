@@ -56,7 +56,7 @@ export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) 
             Le public est acteur
           </div>
 
-          <h1 className="font-display text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
+          <h1 className="font-display text-5xl md:text-7xl leading-[1.1] font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
             Live <span className="text-neon-pink">Jukebox</span>
           </h1>
 

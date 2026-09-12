@@ -34,7 +34,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
             Vivez le frisson de la scène
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
+          <h1 className="text-5xl md:text-7xl leading-[1.1] font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-jam-100 to-jam-400 mb-6 tracking-normal">
             Vous n'êtes plus seul <br />
             <span className="text-neon-pink">sous les projecteurs</span>
           </h1>
