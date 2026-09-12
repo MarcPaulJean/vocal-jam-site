@@ -203,8 +203,8 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
           <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-jam-900 to-jam-800 border border-jam-700 p-10 md:p-16 text-center">
             <div className="absolute inset-0 bg-gradient-to-r from-neon-pink/10 to-neon-blue/10"></div>
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Votre lieu a une âme. Donnez-lui une scène.
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 text-balance">
+                Votre lieu a une âme.<br />Donnez-lui une scène.
               </h2>
               <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
                 Parlons de votre projet, sans engagement. On étudie ensemble la date, le lieu et le déroulé de votre première soirée Vocal Jam.
