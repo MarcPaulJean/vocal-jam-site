@@ -46,10 +46,6 @@ const steps = [
 ];
 
 export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <div className="bg-jam-950">
       {/* ============================================================= */}
@@ -77,19 +73,12 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
             Offrez à vos clients une soirée live inoubliable — sans effort, sans risque. Nous amenons les artistes, la technique et l’ambiance. Et les artistes, eux, amènent leur public.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-2xl">
+          <div className="mt-10 flex justify-center w-full">
             <button
               onClick={() => onNavigate(PageView.CONTACT)}
               className="px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_20px_rgba(255,0,128,0.4)] hover:scale-105 transition-transform"
             >
               Proposer mon lieu
-            </button>
-            <button
-              onClick={() => scrollTo('pourquoi')}
-              className="px-8 py-4 rounded-full border border-jam-500 text-jam-100 font-semibold text-lg hover:bg-jam-800 transition-colors flex items-center justify-center gap-2"
-            >
-              <Icons.ChevronDown className="w-5 h-5 text-neon-blue" />
-              Pourquoi accueillir ?
             </button>
           </div>
         </div>
