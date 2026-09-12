@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Icons } from './Icons';
+import { WaveLogo } from './WaveLogo';
 import { PageView, NavigateFn } from '../types';
 
 interface NavbarProps {
@@ -31,9 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             className="flex-shrink-0 flex items-center cursor-pointer group" 
             onClick={() => handleNav(PageView.HOME)}
           >
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-pink to-jam-500 flex items-center justify-center mr-3 group-hover:scale-105 transition-transform">
-              <Icons.Mic className="text-white w-6 h-6" />
-            </div>
+            <WaveLogo className="w-10 h-10 mr-3 group-hover:scale-105 transition-transform" />
             <span className="font-bold text-xl tracking-tight text-white">
               Vocal<span className="text-neon-blue">Jam</span>
             </span>
