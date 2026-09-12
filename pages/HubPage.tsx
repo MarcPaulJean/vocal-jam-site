@@ -7,6 +7,34 @@ interface HubPageProps {
   onNavigate: NavigateFn;
 }
 
+// Les trois manières de vivre la soirée, illustrées — cliquables vers leur pilier.
+const ways = [
+  {
+    page: PageView.MUSICIANS,
+    label: 'Le musicien',
+    sub: 'Sur scène, micro en main',
+    img: 'https://images.unsplash.com/photo-1525362081669-2b476bb628c3?auto=format&fit=crop&q=80&w=1000',
+    stripe: 'bg-neon-pink',
+    labelColor: 'text-neon-pink',
+  },
+  {
+    page: PageView.HOST,
+    label: "L'hôte",
+    sub: 'Un lieu qui vibre',
+    img: 'https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?auto=format&fit=crop&q=80&w=1000',
+    stripe: 'bg-neon-blue',
+    labelColor: 'text-neon-blue',
+  },
+  {
+    page: PageView.LIVEJUKEBOX,
+    label: 'Le public',
+    sub: 'La foule qui chante',
+    img: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&q=80&w=1000',
+    stripe: 'bg-gradient-to-r from-neon-pink to-neon-blue',
+    labelColor: 'text-jam-100',
+  },
+];
+
 // Les trois « portes » du hub : chaque rôle a sa page-pilier et sa teinte.
 const doors = [
   {
@@ -114,26 +142,40 @@ export const HubPage: React.FC<HubPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ============================================================= */}
-      {/* SIGNATURE + CTA                                               */}
+      {/* SIGNATURE — TROIS MANIÈRES D'Y ÊTRE                           */}
       {/* ============================================================= */}
       <section className="pb-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-jam-900 to-jam-800 border border-jam-700 p-10 md:p-14 text-center">
-            <div className="absolute inset-0 bg-gradient-to-r from-neon-pink/10 to-neon-blue/10"></div>
-            <div className="relative z-10">
-              <p className="font-display text-2xl md:text-3xl font-bold text-white mb-4 text-balance">
-                Une scène. Trois manières d'y être.<br />Zéro spectateur passif.
-              </p>
-              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
-                Un projet, une envie, une date ? Parlons-en — on trouve ensemble la formule qui vous ressemble.
-              </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="font-display text-2xl md:text-3xl font-bold text-white text-balance">
+              Une scène. Trois manières d'y être.<br />Zéro spectateur passif.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {ways.map((w) => (
               <button
-                onClick={() => onNavigate(PageView.CONTACT)}
-                className="px-10 py-4 bg-gradient-to-r from-neon-pink to-jam-600 hover:from-neon-pink hover:to-jam-500 text-white text-lg font-bold rounded-full shadow-[0_0_20px_rgba(255,0,128,0.3)] hover:scale-105 transition-transform"
+                key={w.label}
+                onClick={() => onNavigate(w.page)}
+                className="group relative rounded-3xl overflow-hidden border border-jam-800 hover:border-jam-600 shadow-xl aspect-[4/5] md:aspect-[3/4] transition-all duration-300 hover:-translate-y-1"
               >
-                Réserver
+                <img
+                  src={w.img}
+                  alt={w.sub}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-jam-950/40 to-transparent"></div>
+                <span className={`absolute inset-x-0 bottom-0 h-1.5 ${w.stripe}`}></span>
+                <div className="absolute inset-x-0 bottom-0 p-6 text-left">
+                  <p className={`font-display text-2xl font-bold ${w.labelColor} mb-1`}>{w.label}</p>
+                  <p className="text-gray-200 text-sm">{w.sub}</p>
+                  <span className="mt-3 inline-flex items-center gap-2 text-white/90 text-sm font-semibold group-hover:gap-3 transition-all">
+                    Pousser la porte
+                    <Icons.ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
               </button>
-            </div>
+            ))}
           </div>
         </div>
       </section>
