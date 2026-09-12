@@ -9,12 +9,23 @@ interface LiveJukeboxPageProps {
 
 const IMG_PUBLIC = "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&q=80&w=1600"; // Public en concert
 
-const steps = [
+type Step = {
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
+  title: string;
+  text: string;
+  url?: string;
+  cta?: string;
+};
+
+const steps: Step[] = [
   {
     icon: Icons.Music,
     color: 'text-neon-pink',
     title: 'Vous choisissez',
     text: "Un QR code sur votre table, et votre téléphone devient la télécommande de la soirée : vous votez pour les titres que vous voulez entendre.",
+    url: 'https://jukebox.vocaljam.org/',
+    cta: 'Tester le vote',
   },
   {
     icon: Icons.Community,
@@ -97,18 +108,34 @@ export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) 
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((s, idx) => (
-              <div key={idx} className="relative bg-jam-900 rounded-3xl p-8 border border-jam-800 hover:border-neon-pink/40 transition-all duration-300 shadow-xl flex flex-col">
-                <span className="absolute -top-4 left-8 w-9 h-9 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold flex items-center justify-center shadow-lg">
-                  {idx + 1}
-                </span>
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-jam-950 border border-jam-700 mb-6 mt-2">
-                  <s.icon className={`w-7 h-7 ${s.color}`} />
-                </div>
-                <h3 className="font-display text-xl font-bold text-white mb-3">{s.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{s.text}</p>
-              </div>
-            ))}
+            {steps.map((s, idx) => {
+              const Wrapper = (s.url ? 'a' : 'div') as React.ElementType;
+              const linkProps = s.url
+                ? { href: s.url, target: '_blank', rel: 'noopener noreferrer' }
+                : {};
+              return (
+                <Wrapper
+                  key={idx}
+                  {...linkProps}
+                  className={`group relative bg-jam-900 rounded-3xl p-8 border border-jam-800 hover:border-neon-pink/40 transition-all duration-300 shadow-xl flex flex-col ${s.url ? 'cursor-pointer hover:-translate-y-1' : ''}`}
+                >
+                  <span className="absolute -top-4 left-8 w-9 h-9 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold flex items-center justify-center shadow-lg">
+                    {idx + 1}
+                  </span>
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-jam-950 border border-jam-700 mb-6 mt-2">
+                    <s.icon className={`w-7 h-7 ${s.color}`} />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-white mb-3">{s.title}</h3>
+                  <p className="text-gray-300 leading-relaxed flex-1">{s.text}</p>
+                  {s.url && (
+                    <span className={`mt-5 inline-flex items-center gap-2 font-semibold ${s.color} group-hover:gap-3 transition-all`}>
+                      {s.cta}
+                      <Icons.ArrowRight className="w-5 h-5" />
+                    </span>
+                  )}
+                </Wrapper>
+              );
+            })}
           </div>
         </div>
       </section>
