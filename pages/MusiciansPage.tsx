@@ -181,6 +181,83 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
+            {/* --- BACKTRACK SUR MESURE --- */}
+            <div id="backtrack" className="relative rounded-3xl overflow-hidden border border-jam-700 bg-gradient-to-br from-jam-900 to-jam-950 scroll-mt-20">
+              <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-neon-blue/10 rounded-full blur-[120px]"></div>
+              <div className="absolute bottom-[-20%] left-[-10%] w-96 h-96 bg-neon-pink/10 rounded-full blur-[120px]"></div>
+
+              <div className="relative z-10 p-8 md:p-14">
+                {/* En-tête */}
+                <div className="text-center max-w-3xl mx-auto mb-14">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neon-blue/30 bg-neon-blue/10 text-neon-blue text-sm font-semibold mb-6">
+                    <Icons.Sound className="w-4 h-4" />
+                    Nouveau · Backtrack sur mesure
+                  </span>
+                  <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-5 text-balance">
+                    Pas une copie. <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">Votre version.</span>
+                  </h3>
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    Les backtracks du commerce collent à l'original, note pour note — et ils le font bien. Mais quand vous cherchez une relecture qui n'existe nulle part — une cover réarrangée, une autre couleur, votre tonalité — ou votre propre création, il faut une oreille humaine. La mienne. <span className="text-white font-semibold">Guidé par un créateur, pas par une IA.</span>
+                  </p>
+                </div>
+
+                {/* Quand ça a du sens */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                  {[
+                    { icon: Icons.Music, color: 'text-neon-pink', title: 'Cover créative', text: "Une version qui vous ressemble : autre tempo, autre style, réharmonisée. Pas un clone." },
+                    { icon: Icons.Sprout, color: 'text-neon-blue', title: 'Création originale', text: "Vous composez ? Un accompagnement à la hauteur de votre idée, arrangé pour la porter." },
+                    { icon: Icons.Energy, color: 'text-jam-300', title: 'Zéro générique', text: "Ni catalogue passe-partout, ni IA. Un vrai parti pris musical, assumé." },
+                  ].map((c) => (
+                    <div key={c.title} className="bg-jam-950/60 border border-jam-800 rounded-2xl p-6">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-jam-900 border border-jam-700 mb-4">
+                        <c.icon className={`w-6 h-6 ${c.color}`} />
+                      </div>
+                      <h4 className="font-display text-lg font-bold text-white mb-2">{c.title}</h4>
+                      <p className="text-gray-400 text-sm leading-relaxed">{c.text}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Comment ça marche */}
+                <div className="max-w-4xl mx-auto">
+                  <p className="text-center text-sm uppercase tracking-widest text-gray-500 mb-8">Comment ça marche</p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {[
+                      { title: 'On part de votre intention', text: "La chanson (ou votre compo), la couleur que vous cherchez, votre tonalité, votre tempo. Votre vision guide tout." },
+                      { title: "Je l'arrange à la main", text: "Réharmonisation, choix des instruments, dynamique : un vrai parti pris, en qualité studio. Pas un preset, pas un algorithme." },
+                      { title: 'On affine, prêt pour la scène', text: "Vous écoutez, on ajuste jusqu'au bon rendu. Livré calé pour votre matériel (stéréo ou multipiste)." },
+                    ].map((s, idx) => (
+                      <div key={idx} className="relative bg-jam-950/40 rounded-2xl p-6 border border-jam-800">
+                        <span className="absolute -top-3 left-6 w-8 h-8 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white text-sm font-bold flex items-center justify-center shadow-lg">
+                          {idx + 1}
+                        </span>
+                        <h4 className="font-display text-base font-bold text-white mb-2 mt-2">{s.title}</h4>
+                        <p className="text-gray-400 text-sm leading-relaxed">{s.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Pourquoi moi + CTA */}
+                <div className="mt-14 text-center max-w-2xl mx-auto">
+                  <p className="text-xl text-white italic font-light mb-2">
+                    « J'ai usé les catalogues et l'IA jusqu'à leurs limites — c'est là que commence mon travail. »
+                  </p>
+                  <p className="text-sm text-gray-500 mb-8">
+                    Révisions incluses jusqu'au bon rendu. Chœurs, guide vocal et piste de clic à la carte.
+                  </p>
+                  <button
+                    onClick={() => onNavigate(PageView.CONTACT, 'backtrack')}
+                    className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-neon-pink to-jam-600 hover:from-neon-pink hover:to-jam-500 text-white text-lg font-bold rounded-full shadow-[0_0_20px_rgba(255,0,128,0.3)] hover:scale-105 transition-transform"
+                  >
+                    <Icons.Sound className="w-5 h-5" />
+                    Parler de mon projet
+                  </button>
+                  <p className="text-sm text-gray-500 mt-4">Sur devis, selon l'ambition de l'arrangement.</p>
+                </div>
+              </div>
+            </div>
+
             {/* --- CTA FINAL --- */}
             <div className="text-center py-12">
               <h3 className="text-2xl font-bold text-white mb-6">Chanteur ou instrumentiste : la scène vous attend.</h3>

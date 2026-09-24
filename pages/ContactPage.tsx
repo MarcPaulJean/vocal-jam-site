@@ -12,6 +12,7 @@ interface ContactPageProps {
 // Objets possibles de la demande, avec des libellés lisibles pour l'email.
 const OBJETS: { value: string; label: string }[] = [
   { value: 'musiciens', label: 'Monter sur scène (musicien)' },
+  { value: 'backtrack', label: 'Backtrack sur mesure' },
   { value: 'hotes', label: 'Accueillir une Vocal Jam (lieu)' },
   { value: 'livejukebox', label: 'Organiser un Live Jukebox' },
   { value: 'autre', label: 'Autre' },

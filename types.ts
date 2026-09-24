@@ -23,7 +23,7 @@ export enum PageView {
 
 // Contexte de la demande de réservation, transmis depuis la « porte » d'origine
 // (musicien / hôte / Live Jukebox) pour pré-remplir le formulaire de contact.
-export type ReservationContext = '' | 'musiciens' | 'hotes' | 'livejukebox';
+export type ReservationContext = '' | 'musiciens' | 'hotes' | 'livejukebox' | 'backtrack';
 
 // Navigation : deuxième argument optionnel pour transporter le contexte de
 // réservation lorsqu'on arrive sur la page Réserver.
