@@ -12,10 +12,6 @@ interface MusiciansPageProps {
 }
 
 export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
-  const scrollToExperience = () => {
-    document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <div className="bg-jam-950">
       {/* ============================================================= */}
@@ -43,18 +39,12 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
             Vocal Jam transforme votre rêve en réalité. Chantez ou jouez, toujours accompagné par des pros, avec un son de qualité studio et une technologie de pointe.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-2xl">
-            <button
-              onClick={scrollToExperience}
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_20px_rgba(255,0,128,0.4)] hover:scale-105 transition-transform"
-            >
-              Découvrir l'expérience
-            </button>
+          <div className="mt-10 flex justify-center w-full max-w-2xl">
             <button
               onClick={() => onNavigate(PageView.CONTACT, 'musiciens')}
-              className="px-8 py-4 rounded-full border border-jam-500 text-jam-100 font-semibold text-lg hover:bg-jam-800 transition-colors flex items-center justify-center gap-2"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_20px_rgba(255,0,128,0.4)] hover:scale-105 transition-transform flex items-center justify-center gap-2"
             >
-              <Icons.Event className="w-5 h-5 text-neon-blue" />
+              <Icons.Event className="w-5 h-5" />
               Réserver ma session
             </button>
           </div>
@@ -186,23 +176,6 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
                         {place}
                       </span>
                     ))}
-                  </div>
-
-                  <div className="mt-12 rounded-2xl border border-neon-pink/40 bg-jam-950/60 backdrop-blur-sm p-6 sm:p-8 max-w-2xl mx-auto">
-                    <p className="text-lg sm:text-xl text-white font-semibold mb-2">
-                      Vocal Jam, c'est aussi pour les lieux qui accueillent la scène.
-                    </p>
-                    <p className="text-gray-400 mb-5">
-                      Cafés, campings, fêtes, événements : découvrez tout l'intérêt d'accueillir une soirée.
-                    </p>
-                    <button
-                      onClick={() => onNavigate(PageView.HOST)}
-                      className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_25px_rgba(255,0,128,0.45)] hover:scale-105 transition-transform"
-                    >
-                      <Icons.Handshake className="w-6 h-6" />
-                      Accueillir une Vocal Jam
-                      <Icons.ArrowRight className="w-5 h-5" />
-                    </button>
                   </div>
                 </div>
               </div>

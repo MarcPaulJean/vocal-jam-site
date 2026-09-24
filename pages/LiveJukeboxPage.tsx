@@ -44,10 +44,6 @@ const steps: Step[] = [
 const venues = ['Bars', 'Terrasses', 'Mariages', 'Anniversaires', 'Soirées d’entreprise', 'Campings'];
 
 export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) => {
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <div className="bg-jam-950">
       {/* ============================================================= */}
@@ -75,19 +71,12 @@ export const LiveJukeboxPage: React.FC<LiveJukeboxPageProps> = ({ onNavigate }) 
             Vous choisissez, on joue — et la soirée est à vous. Un juke-box vivant où le public tient la baguette : on vote, on chante, on monte sur scène. Marco s'occupe du reste.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center w-full max-w-2xl">
+          <div className="mt-10 flex justify-center w-full max-w-2xl">
             <button
               onClick={() => onNavigate(PageView.CONTACT, 'livejukebox')}
               className="px-8 py-4 rounded-full bg-gradient-to-r from-neon-pink to-jam-500 text-white font-bold text-lg shadow-[0_0_20px_rgba(255,0,128,0.4)] hover:scale-105 transition-transform"
             >
               Réserver un Live Jukebox
-            </button>
-            <button
-              onClick={() => scrollTo('comment')}
-              className="px-8 py-4 rounded-full border border-jam-500 text-jam-100 font-semibold text-lg hover:bg-jam-800 transition-colors flex items-center justify-center gap-2"
-            >
-              <Icons.ChevronDown className="w-5 h-5 text-neon-blue" />
-              Comment ça marche ?
             </button>
           </div>
         </div>
