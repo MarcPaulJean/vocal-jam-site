@@ -197,7 +197,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
                     Pas une copie. <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">Votre version.</span>
                   </h3>
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    Les backtracks du commerce collent à l'original, note pour note — et ils le font bien. Mais quand vous cherchez une relecture qui n'existe nulle part — une cover réarrangée, une autre couleur, votre tonalité — ou votre propre création, il faut une oreille humaine. La mienne. <span className="text-white font-semibold">Guidé par un créateur, pas par une IA.</span>
+                    Les backtracks du commerce collent à l'original, note pour note — et ils le font bien. Mais quand vous cherchez une relecture qui n'existe nulle part — une cover réarrangée, une autre couleur, votre tonalité — ou votre propre création, il faut des oreilles humaines. Les nôtres. <span className="text-white font-semibold">Guidé par des créateurs, pas par une IA.</span>
                   </p>
                 </div>
 
@@ -224,7 +224,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[
                       { title: 'On part de votre intention', text: "La chanson (ou votre compo), la couleur que vous cherchez, votre tonalité, votre tempo. Votre vision guide tout." },
-                      { title: "Je l'arrange à la main", text: "Réharmonisation, choix des instruments, dynamique : un vrai parti pris, en qualité studio. Pas un preset, pas un algorithme." },
+                      { title: "On l'arrange à la main", text: "Réharmonisation, choix des instruments, dynamique : un vrai parti pris, en qualité studio. Pas un preset, pas un algorithme." },
                       { title: 'On affine, prêt pour la scène', text: "Vous écoutez, on ajuste jusqu'au bon rendu. Livré calé pour votre matériel (stéréo ou multipiste)." },
                     ].map((s, idx) => (
                       <div key={idx} className="relative bg-jam-950/40 rounded-2xl p-6 border border-jam-800">
@@ -241,7 +241,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
                 {/* Pourquoi moi + CTA */}
                 <div className="mt-14 text-center max-w-2xl mx-auto">
                   <p className="text-xl text-white italic font-light mb-2">
-                    « J'ai usé les catalogues et l'IA jusqu'à leurs limites — c'est là que commence mon travail. »
+                    « On a usé les catalogues et l'IA jusqu'à leurs limites — c'est là que commence notre travail. »
                   </p>
                   <p className="text-sm text-gray-500 mb-8">
                     Révisions incluses jusqu'au bon rendu. Chœurs, guide vocal et piste de clic à la carte.
