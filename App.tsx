@@ -1,7 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { PillarPager, pillarNeighbours } from './components/PillarPager';
 import { HubPage } from './pages/HubPage';
 import { MusiciansPage } from './pages/MusiciansPage';
 import { HostPage } from './pages/HostPage';
@@ -38,6 +39,27 @@ function App() {
     document.title = PAGE_TITLES[currentPage] ?? "Vocal Jam — L'Expérience de la scène";
   }, [currentPage]);
 
+  // Navigation horizontale au doigt (mobile/tablette) entre les trois piliers.
+  // Un glissement franchement horizontal fait passer au pilier précédent / suivant.
+  const touch = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.changedTouches[0];
+    touch.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touch.current;
+    touch.current = null;
+    if (!start) return;
+    const neighbours = pillarNeighbours(currentPage);
+    if (!neighbours) return; // seulement sur les pages-piliers
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    // Geste franchement horizontal uniquement (on ne gêne pas le scroll vertical).
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    handleNavigate(dx < 0 ? neighbours.next : neighbours.prev);
+  };
+
   const renderPage = () => {
     // On ajoute une clé pour forcer l'animation à chaque changement de page
     const content = (() => {
@@ -60,6 +82,9 @@ function App() {
     return (
       <div key={currentPage} className="animate-fade-in">
         {content}
+        {pillarNeighbours(currentPage) && (
+          <PillarPager current={currentPage} onNavigate={handleNavigate} />
+        )}
       </div>
     );
   };
@@ -67,7 +92,7 @@ function App() {
   return (
     <div className="bg-jam-950 text-gray-100 min-h-screen font-sans selection:bg-neon-pink selection:text-white flex flex-col">
       <Navbar currentPage={currentPage} onNavigate={handleNavigate} />
-      <main className="flex-grow">
+      <main className="flex-grow" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         {renderPage()}
       </main>
       <Footer />
