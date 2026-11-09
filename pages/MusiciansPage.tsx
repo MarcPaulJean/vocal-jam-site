@@ -4,8 +4,8 @@ import { Icons } from '../components/Icons';
 import { PageView, NavigateFn } from '../types';
 
 // Images d'illustration (Unsplash)
-const IMG_INTERPRETE = "https://images.unsplash.com/photo-1525362081669-2b476bb628c3?auto=format&fit=crop&q=80&w=800"; // Chanteuse émotion micro
-const IMG_TERRASSE = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1200"; // Lieu convivial en soirée
+const IMG_INTERPRETE = "/images/hotes-live.jpg"; // Le trio sur scène (jamais seul)
+const IMG_TERRASSE = "/images/public-live.jpg"; // Public en fête, plein air (photo réelle)
 
 interface MusiciansPageProps {
   onNavigate: NavigateFn;
@@ -57,8 +57,8 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-transparent to-transparent z-10 opacity-40"></div>
 
           <img
-            src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&q=80&w=1600&v=2"
-            alt="Concert Live Joie et Lumière"
+            src="/images/musicien-live.jpg"
+            alt="Marco en concert, au chant et à la guitare"
             className="w-full h-[400px] md:h-[600px] object-cover transform group-hover:scale-105 transition-transform duration-1000"
           />
 
@@ -116,7 +116,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
                 {/* Parcours A : Interprète */}
                 <div className="group bg-jam-900 rounded-3xl overflow-hidden border border-jam-800 hover:border-neon-pink/50 transition-all duration-300 shadow-xl flex flex-col h-full">
                   <div className="h-64 overflow-hidden relative">
-                    <img src={IMG_INTERPRETE} alt="Chanteuse sur scène" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <img src={IMG_INTERPRETE} alt="Le trio sur scène" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-jam-900 via-transparent to-transparent opacity-80"></div>
                     <div className="absolute bottom-4 left-6">
                       <span className="bg-neon-pink/90 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">Sur Scène</span>
