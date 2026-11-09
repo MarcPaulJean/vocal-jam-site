@@ -5,7 +5,7 @@ import { PageView, NavigateFn } from '../types';
 
 // Images d'illustration (Unsplash)
 const IMG_INTERPRETE = "https://images.unsplash.com/photo-1525362081669-2b476bb628c3?auto=format&fit=crop&q=80&w=800"; // Chanteuse émotion micro
-const IMG_TERRASSE = "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?auto=format&fit=crop&q=80&w=1200"; // Terrasse
+const IMG_TERRASSE = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1200"; // Lieu convivial en soirée
 
 interface MusiciansPageProps {
   onNavigate: NavigateFn;
@@ -155,7 +155,7 @@ export const MusiciansPage: React.FC<MusiciansPageProps> = ({ onNavigate }) => {
             {/* --- OÙ JOUER (STORYTELLING) --- */}
             <div className="relative rounded-3xl overflow-hidden">
               <div className="absolute inset-0">
-                <img src={IMG_TERRASSE} alt="Concert en terrasse" className="w-full h-full object-cover opacity-20" />
+                <img src={IMG_TERRASSE} alt="" aria-hidden="true" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-full h-full object-cover opacity-20" />
                 <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-jam-950/80 to-jam-900/50"></div>
               </div>
 

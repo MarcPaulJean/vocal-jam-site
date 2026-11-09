@@ -4,7 +4,7 @@ import { Icons } from '../components/Icons';
 import { PageView, NavigateFn } from '../types';
 
 // Image d'illustration (Unsplash)
-const IMG_TERRASSE = "https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?auto=format&fit=crop&q=80&w=1600"; // Terrasse en soirée
+const IMG_TERRASSE = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1600"; // Lieu convivial en soirée
 
 interface HostPageProps {
   onNavigate: NavigateFn;
@@ -53,7 +53,7 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
       {/* ============================================================= */}
       <div className="relative overflow-hidden bg-jam-900 pt-16 pb-20">
         <div className="absolute inset-0 z-0">
-          <img src={IMG_TERRASSE} alt="Terrasse animée en soirée" className="w-full h-full object-cover opacity-20" />
+          <img src={IMG_TERRASSE} alt="" aria-hidden="true" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-full h-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-jam-950/80 to-jam-900/60"></div>
           <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-neon-pink/20 rounded-full blur-[128px]"></div>
           <div className="absolute bottom-[10%] right-[-10%] w-96 h-96 bg-neon-blue/20 rounded-full blur-[128px]"></div>
