@@ -4,7 +4,7 @@ import { Icons } from '../components/Icons';
 import { PageView, NavigateFn } from '../types';
 
 // Image d'illustration (Unsplash)
-const IMG_TERRASSE = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1600"; // Lieu convivial en soirée
+const IMG_TERRASSE = "/images/hotes-live.jpg"; // Groupe Vocal Jam en concert dans un lieu festif (photo réelle)
 
 interface HostPageProps {
   onNavigate: NavigateFn;
