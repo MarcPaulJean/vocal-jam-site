@@ -196,6 +196,63 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ============================================================= */}
+      {/* EN TOUTE SÉRÉNITÉ — CADRE LÉGAL & ADMINISTRATIF              */}
+      {/* ============================================================= */}
+      <section className="pb-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Et côté administratif ? <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">En toute sérénité.</span>
+            </h2>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              Accueillir de la musique chez vous ne doit jamais vous exposer à un risque. Avec Vocal Jam, tout est carré : une simple facture de prestation, une couverture d’assurance dédiée, et un répertoire 100 % en règle.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Icons.Business,
+                iconClass: 'text-neon-pink',
+                title: 'Zéro paperasse',
+                text: "Une facture clé en main (micro-entreprise, numéro SIRET), déductible de vos charges. Pas de contrat de travail, pas de déclaration GUSO — et aucun risque de requalification URSSAF.",
+              },
+              {
+                icon: Icons.Handshake,
+                iconClass: 'text-neon-blue',
+                title: 'Vous êtes couvert',
+                text: "Assurance Responsabilité Civile Professionnelle dédiée : matériel, installation et public protégés. Câblage sécurisé et montage aux normes.",
+              },
+              {
+                icon: Icons.Sound,
+                iconClass: 'text-jam-400',
+                title: '100 % légal',
+                text: "Bandes d’accompagnement sous licence professionnelle certifiée (Jamzone Pro), conformes SACEM. Aucun fichier piraté — rien à craindre d’un contrôle.",
+              },
+            ].map((c, idx) => (
+              <div key={idx} className="bg-jam-900 rounded-3xl p-8 border border-jam-800 hover:border-neon-blue/40 transition-all duration-300 shadow-xl flex flex-col">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-jam-950 border border-jam-700 mb-6">
+                  <c.icon className={`w-7 h-7 ${c.iconClass}`} />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{c.title}</h3>
+                <p className="text-gray-300 leading-relaxed">{c.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-sm text-gray-500 mt-8">
+            Chaque date est verrouillée par un contrat d’engagement écrit.{' '}
+            <button
+              onClick={() => onNavigate(PageView.CONTACT, 'hotes')}
+              className="text-gray-400 underline underline-offset-2 hover:text-neon-blue transition-colors"
+            >
+              Sur demande : contrat et conditions.
+            </button>
+          </p>
+        </div>
+      </section>
+
+      {/* ============================================================= */}
       {/* CTA FINAL                                                     */}
       {/* ============================================================= */}
       <section className="pb-24">
