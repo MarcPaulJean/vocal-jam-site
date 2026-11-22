@@ -20,8 +20,31 @@ const PAGE_TITLES: Record<PageView, string> = {
   [PageView.CONTACT]: 'Réserver — Vocal Jam',
 };
 
+// Chaque page a sa propre URL (hash). Donner une URL distincte à chaque vue
+// rend le bouton « Retour » du navigateur fiable partout (iOS Safari inclus),
+// permet de partager/rafraîchir une page précise, et évite de sortir du site.
+const PAGE_PATH: Record<PageView, string> = {
+  [PageView.HOME]: '#/',
+  [PageView.MUSICIANS]: '#/musiciens',
+  [PageView.HOST]: '#/hotes',
+  [PageView.LIVEJUKEBOX]: '#/live-jukebox',
+  [PageView.CONTACT]: '#/reserver',
+};
+
+const pageFromHash = (hash: string): PageView => {
+  switch (hash.replace(/^#\/?/, '').toLowerCase()) {
+    case 'musiciens': return PageView.MUSICIANS;
+    case 'hotes': return PageView.HOST;
+    case 'live-jukebox': return PageView.LIVEJUKEBOX;
+    case 'reserver': return PageView.CONTACT;
+    default: return PageView.HOME;
+  }
+};
+
 function App() {
-  const [currentPage, setCurrentPage] = useState<PageView>(PageView.HOME);
+  // Page initiale lue depuis l'URL (permet un lien direct / un rafraîchissement
+  // sur une page précise ; sinon accueil).
+  const [currentPage, setCurrentPage] = useState<PageView>(() => pageFromHash(window.location.hash));
   const [reservationContext, setReservationContext] = useState<ReservationContext>('');
 
   // Navigation : quand on arrive sur la page Réserver, on mémorise le contexte
@@ -32,19 +55,31 @@ function App() {
   const handleNavigate: NavigateFn = (page, context) => {
     if (page === PageView.CONTACT) setReservationContext(context ?? '');
     setCurrentPage(page);
-    window.history.pushState({ page, context: context ?? '' }, '');
+    // Nouvelle entrée d'historique avec une URL distincte : le bouton « Retour »
+    // revient à la page précédente (jusqu'à l'accueil) au lieu de quitter le site.
+    if (page !== currentPage) {
+      window.history.pushState({ page, context: context ?? '' }, '', PAGE_PATH[page]);
+    }
   };
 
   // Bouton Retour / Suivant du navigateur : on restaure la page depuis
-  // l'historique. L'entrée initiale n'a pas d'état → on retombe sur l'accueil.
+  // l'historique (ou, à défaut d'état, depuis l'URL).
   useEffect(() => {
+    // L'entrée d'historique initiale est normalisée pour porter la bonne URL/état.
+    window.history.replaceState(
+      { page: currentPage, context: reservationContext },
+      '',
+      PAGE_PATH[currentPage],
+    );
     const onPopState = (e: PopStateEvent) => {
       const state = e.state as { page?: PageView; context?: ReservationContext } | null;
+      const page = state?.page ?? pageFromHash(window.location.hash);
       setReservationContext(state?.context ?? '');
-      setCurrentPage(state?.page ?? PageView.HOME);
+      setCurrentPage(page);
     };
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Remonter en haut de page et mettre à jour le titre d'onglet à chaque
