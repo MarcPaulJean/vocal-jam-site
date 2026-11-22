@@ -26,11 +26,26 @@ function App() {
 
   // Navigation : quand on arrive sur la page Réserver, on mémorise le contexte
   // de la « porte » d'origine (musicien / hôte / Live Jukebox) pour pré-remplir
-  // le formulaire.
+  // le formulaire. On empile aussi une entrée dans l'historique du navigateur :
+  // ainsi le bouton « Retour » revient dans l'app (jusqu'à l'accueil) au lieu
+  // de sortir du site.
   const handleNavigate: NavigateFn = (page, context) => {
     if (page === PageView.CONTACT) setReservationContext(context ?? '');
     setCurrentPage(page);
+    window.history.pushState({ page, context: context ?? '' }, '');
   };
+
+  // Bouton Retour / Suivant du navigateur : on restaure la page depuis
+  // l'historique. L'entrée initiale n'a pas d'état → on retombe sur l'accueil.
+  useEffect(() => {
+    const onPopState = (e: PopStateEvent) => {
+      const state = e.state as { page?: PageView; context?: ReservationContext } | null;
+      setReservationContext(state?.context ?? '');
+      setCurrentPage(state?.page ?? PageView.HOME);
+    };
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
 
   // Remonter en haut de page et mettre à jour le titre d'onglet à chaque
   // changement de page (SEO + partage).
