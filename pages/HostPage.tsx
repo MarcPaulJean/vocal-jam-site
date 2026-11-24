@@ -70,7 +70,7 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
           </h1>
 
           <p className="mt-4 max-w-2xl text-xl text-gray-300 mx-auto">
-            Offrez à vos clients une soirée live inoubliable — sans effort, sans risque. Nous amenons les artistes, la technique et l’ambiance. Et les artistes, eux, amènent leur public.
+            Offrez à vos clients une soirée live inoubliable — simple et clé en main. Nous amenons les artistes, la technique et l’ambiance. Et les artistes, eux, amènent leur public.
           </p>
 
           <div className="mt-10 flex justify-center w-full">
@@ -205,7 +205,7 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
               Et côté administratif ? <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">En toute sérénité.</span>
             </h2>
             <p className="text-lg text-gray-300 leading-relaxed">
-              Accueillir de la musique chez vous ne doit jamais vous exposer à un risque. Avec Vocal Jam, tout est carré : une simple facture de prestation, une couverture d’assurance dédiée, et un répertoire 100 % en règle.
+              Accueillir de la musique chez vous doit rester simple. Avec Vocal Jam, tout est carré : une simple facture de prestation, une intervention assurée, et un répertoire sous licence professionnelle.
             </p>
           </div>
 
@@ -215,19 +215,19 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
                 icon: Icons.Business,
                 iconClass: 'text-neon-pink',
                 title: 'Zéro paperasse',
-                text: "Une facture clé en main (micro-entreprise, numéro SIRET), déductible de vos charges. Pas de contrat de travail, pas de déclaration GUSO — et aucun risque de requalification URSSAF.",
+                text: "Une facture clé en main (micro-entreprise, numéro SIRET), déductible de vos charges. Vous réglez une prestation : pas de contrat de travail, pas de bulletin de paie, pas de déclaration d’embauche de votre côté.",
               },
               {
                 icon: Icons.Handshake,
                 iconClass: 'text-neon-blue',
-                title: 'Vous êtes couvert',
-                text: "Assurance Responsabilité Civile Professionnelle dédiée : matériel, installation et public protégés. Câblage sécurisé et montage aux normes.",
+                title: 'Une intervention assurée',
+                text: "Le prestataire dispose d’une assurance Responsabilité Civile Professionnelle couvrant son matériel et sa prestation. Installation réalisée dans les règles de l’art, câblage sécurisé.",
               },
               {
                 icon: Icons.Sound,
                 iconClass: 'text-jam-400',
-                title: '100 % légal',
-                text: "Bandes d’accompagnement sous licence professionnelle certifiée (Jamzone Pro), conformes SACEM. Aucun fichier piraté — rien à craindre d’un contrôle.",
+                title: 'Un répertoire en règle',
+                text: "Bandes d’accompagnement exploitées sous licence professionnelle (Jamzone Pro), conformes SACEM. Aucun fichier piraté.",
               },
             ].map((c, idx) => (
               <div key={idx} className="bg-jam-900 rounded-3xl p-8 border border-jam-800 hover:border-neon-blue/40 transition-all duration-300 shadow-xl flex flex-col">
