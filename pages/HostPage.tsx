@@ -196,6 +196,32 @@ export const HostPage: React.FC<HostPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* ============================================================= */}
+      {/* SCÈNE OUVERTE ACCOMPAGNÉE — VOS CLIENTS DEVIENNENT LA SCÈNE   */}
+      {/* ============================================================= */}
+      <section className="pb-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative rounded-3xl overflow-hidden border border-jam-700">
+            <div className="absolute inset-0">
+              <img src="/images/hotes-live.jpg" alt="" aria-hidden="true" onError={(e) => { e.currentTarget.style.display = 'none'; }} className="w-full h-full object-cover opacity-25" />
+              <div className="absolute inset-0 bg-gradient-to-t from-jam-950 via-jam-950/85 to-jam-900/70"></div>
+              <div className="absolute top-[-30%] left-[-10%] w-80 h-80 bg-neon-pink/10 rounded-full blur-[100px]"></div>
+            </div>
+            <div className="relative z-10 p-10 md:p-14 text-center max-w-3xl mx-auto">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-jam-950/70 backdrop-blur border border-jam-700 mb-6">
+                <Icons.Mic className="w-7 h-7 text-neon-pink" />
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-balance">
+                Vos clients deviennent <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-blue">la scène</span>
+              </h2>
+              <p className="text-lg text-gray-200 leading-relaxed">
+                Pas besoin d’être un artiste confirmé. Avec mon matériel pro et mon accompagnement en direct, n’importe qui peut monter au micro — vos clients, un habitué, un musicien de passage — et vivre, le temps d’un morceau, l’expérience d’une vraie scène. Je m’adapte au débotté : vous chantez ou jouez, je vous accompagne. Et pour les plus mordus, je peux les aider à préparer leur répertoire pour leurs propres occasions de scène.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================= */}
       {/* EN TOUTE SÉRÉNITÉ — CADRE LÉGAL & ADMINISTRATIF              */}
       {/* ============================================================= */}
       <section className="pb-20">
